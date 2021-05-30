@@ -5,7 +5,7 @@ const Details = (props) =>{
 	console.log(props.location.aboutProps)
 	return(
 		<div>
-			details 
+			 {props.location.aboutProps['id']}
 		</div>
 	)
 }

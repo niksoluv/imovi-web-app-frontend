@@ -2,12 +2,12 @@ import styles from './Body.module.css'
 import React from 'react';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import Details from '../details/Details';
+import MovieItem from './movieItem/MovieItem';
 
 class Body extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props.name)
 	}
 
 	state = {
@@ -32,22 +32,10 @@ class Body extends React.Component {
 			const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']
 			let path = 'details'
 			return (
-				<div className={styles.movieElement}>
-					<div className={styles.imageElement}>
-						<img src={imageUrl} />
-					</div>
-					<div className={styles.contentElement}>
-						<div>
-							<NavLink to={{
-								pathname: "/details",
-								aboutProps: {
-									id: el['id']
-								}
-							}}
-							> {el['original_title']}</NavLink>
-						</div>
-					</div>
-				</div>
+				<MovieItem key={el['id']}
+				imageUrl={imageUrl} 
+				id={el['id']} 
+				originalTitle={el['original_title']}/>
 			)
 		})
 		return (

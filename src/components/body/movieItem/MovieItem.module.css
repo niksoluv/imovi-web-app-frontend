@@ -1,0 +1,36 @@
+
+.movieElement{
+	display: grid;
+	grid-template-areas: 'image' 'data' ;
+
+	grid-template-rows: 1fr 20px;
+
+	width: 1fr;
+	margin: 10px;
+	background-color: aqua;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 20px;
+	border-style:solid;
+}
+.imageElement{
+	grid-area: image;
+	width: auto;
+	overflow:hidden;
+}
+.contentElement{
+	grid-area: data;
+	background-color: blueviolet;
+	
+	align-self: center;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+	margin: auto;
+	width: 200px;
+}
+.imageElement img{
+	border-radius: 20px;
+	width: 200px;
+}
