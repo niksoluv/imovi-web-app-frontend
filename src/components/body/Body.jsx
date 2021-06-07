@@ -8,7 +8,7 @@ const Body = () => {
     'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
   )
 	if (loading) return <p>Loading...</p>
-	console.log(data)
+	console.log(data.results)
 
 	let movieArray = data.results.map(el => {
 		const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']

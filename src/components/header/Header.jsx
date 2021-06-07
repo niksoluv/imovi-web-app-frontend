@@ -8,7 +8,7 @@ const Header = (props) => {
 				<NavLink to={{
 					pathname: "/movies"
 				}}
-				> <img src='/ic_small.png' alt='' />
+				> <img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' />
 				</NavLink>
 			</div>
 		</div>
