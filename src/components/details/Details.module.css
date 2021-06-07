@@ -1,0 +1,27 @@
+.detailsWrapper {
+	padding: 10px;
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	grid-auto-rows: auto;
+	background-color: dimgrey;
+}
+
+.detailsImage {
+	background-color: aqua;
+}
+
+.detailsImage img{
+	border-radius: 20px;
+	width: 300px;
+}
+
+.content {
+	background-color: rgb(127, 127, 250);
+	padding-left: 10px;
+}
+
+.info {
+	background-color: blueviolet;
+	grid-column-start: 1;
+	grid-column-end:3;
+}

@@ -1,21 +1,19 @@
 import styles from './MovieItem.module.css'
 import React from 'react';
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const MovieItem = (props) => {
 
 	return (
 		<div className={styles.movieElement}>
 			<div className={styles.imageElement}>
-				<img src={props.imageUrl} />
+				<img src={props.imageUrl} alt={props.originalTitle} title={props.originalTitle}/>
 			</div>
 			<div className={styles.contentElement}>
 				<div>
 					<NavLink to={{
 						pathname: "/details",
-						aboutProps: {
-							id: props.id
-						}
+						state: { id: props.id }
 					}}
 					> {props.originalTitle}</NavLink>
 				</div>
