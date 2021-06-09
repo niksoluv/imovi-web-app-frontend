@@ -20,8 +20,6 @@ function App() {
 						<Route path='/details' component={Details} />
 						<Route path='/login' component={()=><LogIn/>}/>
 						<Route path='/register' component={()=><Register/>}/>
-						{/* <Route path='/movies' render={() => <Body />} />
-					<Route path='/details' render={() => <Details />} /> */}
 					</Container>
 					<footer className='footer'>footer</footer>
 			</div>

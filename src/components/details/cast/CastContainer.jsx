@@ -1,10 +1,17 @@
 import axios from "axios"
 import { makeUseAxios } from "axios-hooks"
+import ScrollMenu from "react-horizontal-scrolling-menu";
+import CastItem from "./CastItem";
+import styles from './CastContainer.module.css'
 
 const useAxios = makeUseAxios({
 	axios: axios.create({ baseURL: '' })
 })
-
+const MenuItem = ({ text, selected }) => {
+	return <div
+		className={`menu-item ${selected ? 'active' : ''}`}
+	>{text}</div>;
+};
 const CastContainer = (props) => {
 
 	const [{ data: movieCast, loading: loading, error: error }] = useAxios(
@@ -15,11 +22,18 @@ const CastContainer = (props) => {
 	if (loading) return 'Loading...'
 
 	console.log(movieCast.cast)
-	const cast = movieCast.cast.map(el=>{
-		return <div>{el.original_name}</div>
-	})
-
-	return <div>{cast}</div>
+	const cast = movieCast.cast.filter(el=>el.profile_path).map(el => {
+		
+		return (<CastItem imgSrc={'https://image.tmdb.org/t/p/w500' + el.profile_path}
+			name={el.name}
+			key={el.id} />)
+})
+	
+	return (
+		<div className={styles.scrollMenu}>
+			<ScrollMenu data={cast} />
+		</div>
+	)
 }
 
 export default CastContainer

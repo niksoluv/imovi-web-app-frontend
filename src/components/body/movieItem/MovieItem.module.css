@@ -7,7 +7,7 @@
 
 	width: 1fr;
 	margin: 10px;
-	background-color: aqua;
+	background-color: rgb(36, 36, 36);
 	border-width: 2px;
 	border-color: black;
 	border-radius: 20px;
@@ -20,7 +20,6 @@
 }
 .contentElement{
 	grid-area: data;
-	background-color: blueviolet;
 	
 	align-self: center;
   overflow:hidden;
@@ -28,8 +27,17 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 	margin: auto;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
 	width: 200px;
 }
+
+.contentElement a{
+	text-decoration: none;
+	color: aqua;
+}
+
 .imageElement img{
 	border-radius: 20px;
 	width: 200px;

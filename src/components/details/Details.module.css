@@ -7,21 +7,33 @@
 }
 
 .detailsImage {
-	background-color: aqua;
+	background-color: rgb(58, 58, 58);
 }
 
-.detailsImage img{
+.detailsImage img {
 	border-radius: 20px;
 	width: 300px;
 }
 
 .content {
-	background-color: rgb(127, 127, 250);
+	background-color: rgb(49, 49, 49);
 	padding-left: 10px;
 }
 
 .info {
-	background-color: blueviolet;
+	background-color: rgb(51, 51, 51);
 	grid-column-start: 1;
-	grid-column-end:3;
+	grid-column-end: 3;
+}
+
+.video iframe {
+	width: 500px;
+	height: 300px;
+	background-color: bisque;
+}
+
+.cast {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	background-color: rgb(73, 73, 73);
 }

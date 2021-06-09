@@ -31,35 +31,37 @@ const Details = (props) => {
 	const genres = movieData.genres.map(el => el.name).join(', ')
 	const videoKey = videoData.results[0].key
 	return (
-		<div className={styles.detailsWrapper}>
-			<div className={styles.detailsImage}>
-				<img src={imageUrl} alt={movieData.original_title} title={movieData.original_title} />
-			</div>
-			<div className={styles.content}>
-				<div>{movieData.original_title}</div>
-				<div>{releaseDate}</div>
-				<div>{movieData.tagline}</div>
-				<div>Budget: {movieData.budget}$</div>
-				<div>Duration: {movieData.runtime}min.</div>
-				<div>Genres: {genres}</div>
-				<button>Favourite</button>
+		<div>
+			<div className={styles.detailsWrapper}>
+				<div className={styles.detailsImage}>
+					<img src={imageUrl} alt={movieData.original_title} title={movieData.original_title} />
+				</div>
+				<div className={styles.content}>
+					<div>{movieData.original_title}</div>
+					<div>{releaseDate}</div>
+					<div>{movieData.tagline}</div>
+					<div>Budget: {movieData.budget}$</div>
+					<div>Duration: {movieData.runtime}min.</div>
+					<div>Genres: {genres}</div>
+					<button>Favourite</button>
+				</div>
+				
 			</div>
 			<div className={styles.info}>
-				<div>
-					<div>Overview</div>
-					<div>{movieData.overview}</div>
+					<div>
+						<div>Overview</div>
+						<div>{movieData.overview}</div>
+					</div>
 				</div>
-			</div>
-			<div className=''>
-				<iframe src={'https://www.youtube.com/embed/' + videoKey}
-					title='title'>
-				</iframe>
-			</div>
-			<div className=''>
-				<CastContainer id={movieId} />
-			</div>
+				<div className={styles.video}>
+					<iframe allowFullScreen={true} src={'https://www.youtube.com/embed/' + videoKey}
+						title='title'>
+					</iframe>
+				</div>
+				<div className={styles.cast}>
+					<CastContainer id={movieId} />
+				</div>
 		</div>
-
 	)
 }
 
