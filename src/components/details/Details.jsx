@@ -1,11 +1,11 @@
 import styles from './Details.module.css'
-import React, { useEffect, useState } from 'react';
-//import useAxios from 'axios-hooks';
+import React from 'react';
 import axios from 'axios';
 import { makeUseAxios } from 'axios-hooks';
+import CastContainer from './cast/CastContainer';
 
 const useAxios = makeUseAxios({
-	axios: axios.create({ baseURL: 'https://reqres.in/api' })
+	axios: axios.create({ baseURL: '' })
 })
 
 const Details = (props) => {
@@ -23,6 +23,7 @@ const Details = (props) => {
 	)
 
 	if (movieLoading || videoLoading) return 'Loading...'
+	if (getError || getError2) return 'Error...'
 
 	console.log(movieData.production_countries[0].iso_3166_1)
 	const releaseDate = movieData.release_date + ' ' + movieData.production_countries[0].iso_3166_1
@@ -41,6 +42,7 @@ const Details = (props) => {
 				<div>Budget: {movieData.budget}$</div>
 				<div>Duration: {movieData.runtime}min.</div>
 				<div>Genres: {genres}</div>
+				<button>Favourite</button>
 			</div>
 			<div className={styles.info}>
 				<div>
@@ -49,8 +51,12 @@ const Details = (props) => {
 				</div>
 			</div>
 			<div className=''>
-				<iframe src={'https://www.youtube.com/embed/' + videoKey}>
+				<iframe src={'https://www.youtube.com/embed/' + videoKey}
+					title='title'>
 				</iframe>
+			</div>
+			<div className=''>
+				<CastContainer id={movieId} />
 			</div>
 		</div>
 

@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-areas: 'h' 'c' 'f';
 
-	grid-auto-rows: 42px 2fr 40px;
+	grid-auto-rows: 50px 2fr 40px;
 }
 
 html{
