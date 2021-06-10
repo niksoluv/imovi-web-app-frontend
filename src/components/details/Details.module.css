@@ -4,6 +4,8 @@
 	grid-template-columns: 1fr 10fr;
 	grid-auto-rows: auto;
 	background-color: dimgrey;
+	
+	color:beige;
 }
 
 .detailsImage {
@@ -18,12 +20,15 @@
 .content {
 	background-color: rgb(49, 49, 49);
 	padding-left: 10px;
+	color:beige;
 }
 
 .info {
 	background-color: rgb(51, 51, 51);
 	grid-column-start: 1;
 	grid-column-end: 3;
+	padding: 5px;
+	color:beige;
 }
 
 .video iframe {
@@ -33,7 +38,5 @@
 }
 
 .cast {
-	grid-column-start: 1;
-	grid-column-end: 3;
 	background-color: rgb(73, 73, 73);
 }

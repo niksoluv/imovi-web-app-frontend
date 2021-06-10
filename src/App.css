@@ -3,10 +3,7 @@
 	grid-template-areas: 'h' 'c' 'f';
 
 	grid-auto-rows: 60px 2fr 40px;
-}
-
-html{
-	background-color: black;
+	background-color: rgb(37, 37, 37);
 }
 
 .footer{

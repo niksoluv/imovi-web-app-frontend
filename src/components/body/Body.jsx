@@ -2,9 +2,9 @@ import styles from './Body.module.css'
 import MovieItem from './movieItem/MovieItem';
 import useAxios from 'axios-hooks';
 
-const Body = () => {
+const Body = (props) => {
 	const [{ data, loading, error },] = useAxios(
-    'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
+    props.requestUrl
   )
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error...</p>

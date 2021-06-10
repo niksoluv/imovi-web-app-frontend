@@ -5,16 +5,12 @@ const Header = (props) => {
 	return (
 		<div>
 
-			<nav className="navbar navbar-expand-lg navbar-light bg-light" height='45px'>
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark" height='45px'>
 				<NavLink className="navbar-brand" to={{
 					pathname: "/movies"
 				}}>
 					<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30" alt=""></img>
 				</NavLink>
-				{/* <a class="navbar-brand" href="#">Navbar</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button> */}
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
 						<li className="nav-item">
@@ -28,7 +24,9 @@ const Header = (props) => {
 							}}>Register</NavLink>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">Pricing</a>
+							<NavLink className="nav-link" to={{
+								pathname: "/favourites"
+							}}>Favourites</NavLink>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
