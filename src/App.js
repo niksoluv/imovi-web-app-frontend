@@ -10,36 +10,23 @@ import Register from './components/authentication/register/Register';
 import Users from './users'
 
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
-const favouritesUrl = ''
-
-
-
-
-
-// function App() {
-// 	return (
-// 		<div className="App">
-// 			<h1>Redux Tutorial</h1>
-// 			<Users />
-
-// 		</div>
-// 	);
-// }
-
+const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+const favouritesUrl = 'fav'
 
 function App() {
 	return (
 		<BrowserRouter>
 			<div className='app-wrapper'>
-					<Header />
-					<Container>
-						<Route path='/movies' component={() => <Body />} />
-						<Route path='/favourites' component={() => <Body />} />
-						<Route path='/details' component={Details} />
-						<Route path='/login' component={()=><LogIn/>}/>
-						<Route path='/register' component={()=><Register/>}/>
-					</Container>
-					<footer className='footer'>footer</footer>
+				<Header />
+				<Container>
+					<Route path='/movies' component={() => <Body url={popularUrl} />} />
+					<Route path='/favourites' component={() => <Body url={favouritesUrl} />} />
+					<Route path='/toprated' component={() => <Body url={topRatedUrl} />} />
+					<Route path='/details' component={Details} />
+					<Route path='/login' component={() => <LogIn />} />
+					<Route path='/register' component={() => <Register />} />
+				</Container>
+				<footer className='footer'>footer</footer>
 			</div>
 		</BrowserRouter>
 	);

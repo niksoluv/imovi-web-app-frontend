@@ -15,6 +15,16 @@ const Header = (props) => {
 					<ul className="navbar-nav">
 						<li className="nav-item">
 							<NavLink className="nav-link" to={{
+								pathname: "/movies"
+							}}>Popular</NavLink>
+						</li>
+						<li className="nav-item">
+							<NavLink className="nav-link" to={{
+								pathname: "/toprated"
+							}}>Top Rated</NavLink>
+						</li>
+						<li className="nav-item">
+							<NavLink className="nav-link" to={{
 								pathname: "/login"
 							}}>LogIn</NavLink>
 						</li>
