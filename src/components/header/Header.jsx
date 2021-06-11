@@ -5,7 +5,7 @@ const Header = (props) => {
 	return (
 		<div>
 
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark" height='45px'>
+			<nav className="navbar navbar-expand navbar-dark bg-dark" height='45px'>
 				<NavLink className="navbar-brand" to={{
 					pathname: "/movies"
 				}}>
