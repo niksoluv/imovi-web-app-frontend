@@ -22,7 +22,8 @@ function App() {
 					<Route path='/movies' component={() => <Body url={popularUrl} />} />
 					<Route path='/favourites' component={() => <Body url={favouritesUrl} />} />
 					<Route path='/toprated' component={() => <Body url={topRatedUrl} />} />
-					<Route path='/details' component={Details} />
+					<Route path='/details' component={(props) => {
+						return<Details id={props.location.state.movieId}/>}} />
 					<Route path='/login' component={() => <LogIn />} />
 					<Route path='/register' component={() => <Register />} />
 				</Container>

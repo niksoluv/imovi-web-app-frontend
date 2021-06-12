@@ -18,11 +18,11 @@ const Header = (props) => {
 								pathname: "/movies"
 							}}>Popular</NavLink>
 						</li>
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<NavLink className="nav-link" to={{
 								pathname: "/toprated"
 							}}>Top Rated</NavLink>
-						</li>
+						</li> */}
 						<li className="nav-item">
 							<NavLink className="nav-link" to={{
 								pathname: "/login"

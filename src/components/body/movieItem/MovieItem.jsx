@@ -13,7 +13,7 @@ const MovieItem = (props) => {
 				<div>
 					<NavLink to={{
 						pathname: "/details",
-						state: { id: props.id }
+						state: { movieId: props.id }
 					}}
 					> {props.originalTitle}</NavLink>
 				</div>

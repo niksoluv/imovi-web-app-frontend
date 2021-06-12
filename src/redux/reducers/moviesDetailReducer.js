@@ -1,7 +1,8 @@
-import { GET_USERS, GET_MOVIE_DETAIL } from '../types'
+import {  GET_MOVIE_DETAIL } from '../types'
 
 const initialState = {
-	movies: [],
+	movieData: [],
+	videoData: [],
 	loading: true
 }
 
@@ -9,15 +10,14 @@ export default function (state = initialState, action) {
 
 	switch (action.type) {
 
-		case GET_USERS:
+		case GET_MOVIE_DETAIL:
 			return {
 				...state,
-				movies: action.payload,
+				movieData: action.movieData,
+				videoData: action.videoData,
 				loading: false
 			}
-
 		default: return state
 	}
 
 }
-

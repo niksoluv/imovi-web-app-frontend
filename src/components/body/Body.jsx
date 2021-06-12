@@ -10,11 +10,11 @@ class Body extends Component {
 		this.props.getPopular(this.props.url)
 	}
 	render() {
-		const { users } = this.props.users
+		const { movies } = this.props.movies
 
-		console.log(users)
+		console.log(movies)
 
-		let movieArray = users.map(el => {
+		let movieArray = movies.map(el => {
 			const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']
 			return (
 				<MovieItem key={el['id']}
@@ -31,6 +31,6 @@ class Body extends Component {
 		)
 	}
 }
-const mapStateToProps  = (state) => ({users:state.users})
+const mapStateToProps = (state) => ({movies:state.movies})
 
 export default connect(mapStateToProps, {getPopular})(Body)
