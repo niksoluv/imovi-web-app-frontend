@@ -1,8 +1,8 @@
 import {  GET_MOVIE_DETAIL } from '../types'
 
 const initialState = {
-	movieData: [],
-	videoData: [],
+	movieData: {},
+	//videoData: {},
 	loading: true
 }
 
@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				movieData: action.movieData,
-				videoData: action.videoData,
+				//videoData: action.videoData,
 				loading: false
 			}
 		default: return state

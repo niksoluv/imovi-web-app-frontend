@@ -3,6 +3,6 @@ import moviesReducer from './moviesReducers'
 import moviesDetailReducer from './moviesDetailReducer'
 
 export default combineReducers({
-  movies: moviesReducer,
+  moviesData: moviesReducer,
 	movieDetail: moviesDetailReducer
 })

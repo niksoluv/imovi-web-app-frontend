@@ -9,26 +9,25 @@ export const getDetailData = (movieId) => async dispatch => {
 		const movieReq = await axios.get(url)
 		//const movieData = await axios.all(reqArr)
 
-		url = 'https://api.themoviedb.org/3/movie/'
-			+ movieId
-			+ '/videos?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
+		// url = 'https://api.themoviedb.org/3/movie/'
+		// 	+ movieId
+		// 	+ '/videos?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 
-		const videoReq = await axios.get(url)
+		// const videoReq = await axios.get(url)
 		//const videoData = await axios.all(reqArr)
-
 
 
 		dispatch({
 			type: GET_MOVIE_DETAIL,
 			movieData: movieReq.data,
-			videoData: videoReq.data.results[0]
+			//videoData: videoReq.data.results[0]
 		})
 	}
 	catch (e) {
 		dispatch({
 			type: MOVIE_DETAIL_ERROR,
 			movieData: console.log(e),
-			videoDatta: console.log(e)
+			//videoDatta: console.log(e)
 		})
 	}
 }

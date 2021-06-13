@@ -21,7 +21,7 @@ const CastContainer = (props) => {
 	)
 	if (loading) return 'Loading...'
 
-	console.log(movieCast.cast)
+	//console.log(movieCast.cast)
 	const cast = movieCast.cast.filter(el=>el.profile_path).map(el => {
 		
 		return (<CastItem imgSrc={'https://image.tmdb.org/t/p/w500' + el.profile_path}
