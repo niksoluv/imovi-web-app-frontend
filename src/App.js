@@ -7,7 +7,6 @@ import Details from './components/details/Details';
 import { Container } from 'react-bootstrap';
 import LogIn from './components/authentication/login/Login';
 import Register from './components/authentication/register/Register';
-import Users from './users'
 
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'

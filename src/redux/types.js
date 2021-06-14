@@ -1,4 +1,0 @@
-export const GET_USERS = 'GET_USERS'
-export const USERS_ERROR = 'USERS_ERROR'
-export const GET_MOVIE_DETAIL = 'GET_MOVIE_DEAIL'
-export const MOVIE_DETAIL_ERROR = 'MOVIE_DEAIL_ERROR'
