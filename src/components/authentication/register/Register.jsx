@@ -21,6 +21,7 @@ class RegisterPage extends React.Component{
 			  email: 'Email is not valid!'
 			}
 		  },
+		  redirect: null,
 		  submitted: false
 		}
 	  }
@@ -84,7 +85,7 @@ class RegisterPage extends React.Component{
 			
 			if (response.status === 400)
 				alert('Email or username is already used. Please, try another one.')
-			else if (response.status === 200)
+			else if (response.status === 200){
 				this.props.setCurrentUser({
 					id: data['id'],
 					name: data['name'],
@@ -93,6 +94,8 @@ class RegisterPage extends React.Component{
 					registrationDate: data['registrationDate'],
 					birthDate: data['birthDate']
 				})
+				this.setState({redirect: "/movies"})
+			}
 		}	  
 		 else {
 		  console.log('Invalid Form')
@@ -101,7 +104,9 @@ class RegisterPage extends React.Component{
 	
 	  render() {
 		const { submitted } = this.state;
-		
+		if (this.state.redirect){
+			return <Redirect to={this.state.redirect}/>
+		}
 		return (
 		  <div className={styles.form}>
 			<h1 className={styles.content}>Registration</h1>

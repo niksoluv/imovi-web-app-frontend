@@ -19,6 +19,7 @@ class LoginPage extends React.Component{
           password: 'Enter password'
         }
 		  },
+      redirect: null,
 		  submitted: false
 		}
   }
@@ -98,6 +99,9 @@ class LoginPage extends React.Component{
       )
       console.log(response)
       const data = response.data
+      if (response.status === 200){
+        this.setState({redirect: "/movies"})
+      }
       this.props.setCurrentUser({
         id: data['id'],
         name: data['name'],
@@ -117,6 +121,10 @@ class LoginPage extends React.Component{
     const { username, email, password } = this.state.user;
     const { submitted } = this.state;
     
+    if (this.state.redirect){
+      return <Redirect to={this.state.redirect}/>
+    }
+
     return (
       <div className={styles.form}>
         <h1 className={styles.content}>Login</h1>
