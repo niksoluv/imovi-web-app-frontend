@@ -3,7 +3,6 @@ import styles from './Login.module.css'
 import { connect } from 'react-redux';
 import {usersAction} from '../../../redux/actions/usersAction'
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import MainPage from '../../body/Body'
 import axios from "axios";
 
 class LoginPage extends React.Component{
@@ -89,7 +88,14 @@ class LoginPage extends React.Component{
     if (this.validateForm(this.state.errors)) {
       console.info('Valid Form')
       //usersAction.login(user)
-      const response = await axios.post('https://localhost:44311/api/users/login', user)
+      const response = await axios.get('https://localhost:44311/api/users/login', {
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa(user.email + ':' + user.password)
+        }}
+      )
       console.log(response)
       const data = response.data
       this.props.setCurrentUser({
@@ -100,6 +106,7 @@ class LoginPage extends React.Component{
         registrationDate: data['registrationDate'],
         birthDate: data['birthDate']
       })
+      
     }
     else {
       console.log('Invalid Form')

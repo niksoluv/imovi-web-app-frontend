@@ -26,10 +26,10 @@ class App extends React.Component{
 			registrationDate: '',
 			birthDate: ''
 		}
-		this.getCurrentUser = this.getCurrentUser.bind(this)
+		this.setCurrentUser = this.setCurrentUser.bind(this)
 	}
 
-	getCurrentUser(user){
+	setCurrentUser(user){
 		this.setState(user)
 	}
 
@@ -40,12 +40,12 @@ class App extends React.Component{
 					<Header />
 					<Container>
 						<Route path='/movies' component={() => <Body url={popularUrl} />} />
-						<Route path='/favourites' component={() => <Body url={favouritesUrl} />} />
+						<Route path='/favourites' component={() => <Body url={favouritesUrl} currentUser={this.state}/>} />
 						<Route path='/toprated' component={() => <Body url={topRatedUrl} />} />
 						<Route path='/details' component={(props) => {
 							return<Details id={props.location.state.movieId}/>}} />
-						<Route path='/login' component={() => <LogIn setCurrentUser={this.getCurrentUser}/>} />
-						<Route path='/register' component={() => <Register setCurrentUser={this.getCurrentUser}/>} />
+						<Route path='/login' component={() => <LogIn setCurrentUser={this.setCurrentUser}/>} />
+						<Route path='/register' component={() => <Register setCurrentUser={this.setCurrentUser}/>} />
 					</Container>
 					<footer className='footer'>footer</footer>
 				</div>

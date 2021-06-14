@@ -4,6 +4,7 @@ import useAxios from 'axios-hooks';
 import { Component } from 'react';
 import { getPopular } from '../../redux/actions/moviesActions'
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Body extends Component {
 	componentDidMount() {

@@ -17,6 +17,21 @@ const useAxios = makeUseAxios({
 	axios: axios.create({ baseURL: '' })
 })
 
+const addMovieToFavorite = (movieId) => {
+	if (movieId) {
+		const response = axios.post('https://localhost:44311/api/favoritemovies', {MovieId: movieId})
+		const data = response.data
+
+		if (response.status === 200){
+			console.log('Movie ' + movieId + ' added to favorites for user')
+			
+		}
+		else{
+			console.log('Error while adding movie to favorites!')
+		}
+	}
+}
+
 const Details = (props) => {
 	const movieId = props.id
 
@@ -55,7 +70,7 @@ const Details = (props) => {
 					<div>Duration: {movieData.runtime}min.</div>
 					<div>Genres: {genres}</div>
 					<button onClick={(movieId) => {
-						addMovieToFav(props)
+						addMovieToFavorite(movieId)
 					}}>{btnCaption}</button>
 				</div>
 

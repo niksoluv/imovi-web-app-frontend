@@ -78,7 +78,7 @@ class RegisterPage extends React.Component{
 		if (this.validateForm(this.state.errors)) {
 		  	console.info('Valid Form')
 		  	//usersAction.addProfile(user);
-		  	const response = await axios.post('https://localhost:44311/api/users/register', user)
+		  	const response = await axios.post('https://localhost:44311/api/users/register', user, {withCredentials: true})
 			console.log(response)
 			const data = response.data
 			
