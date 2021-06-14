@@ -20,7 +20,7 @@ const movieToFavorite = (movieId) => {
 		}
 		else{
 			console.log('Movie wasn`t added to favorites!')
-			const deleteResponse = axios.delete('https://localhost:44311/api/favoritemovies', {MovieId: movieId}, {withCredentials: true})
+			const deleteResponse = axios.delete('https://localhost:44311/api/favoritemovies/' + movieId, {withCredentials: true})
 			if (deleteResponse.status === 200){
 				console.log('Movie removed from favorites!')
 			}
