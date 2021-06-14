@@ -6,28 +6,24 @@ import { connect } from 'react-redux';
 import { makeUseAxios } from 'axios-hooks';
 import axios from 'axios';
 
-const addMovieToFav = (props) => {
-	//axios props.id
-}
-
-const ADD_TO_FAV = "Add to favourites"
-const REMOVE_FROM_FAV = "Remove from favourites"
-
 const useAxios = makeUseAxios({
 	axios: axios.create({ baseURL: '' })
 })
 
-const addMovieToFavorite = (movieId) => {
+const movieToFavorite = (movieId) => {
 	if (movieId) {
-		const response = axios.post('https://localhost:44311/api/favoritemovies', {MovieId: movieId})
-		const data = response.data
+		const addResponse = axios.post('https://localhost:44311/api/favoritemovies', {MovieId: movieId}, {withCredentials: true})
 
-		if (response.status === 200){
+		if (addResponse.status === 200){
 			console.log('Movie ' + movieId + ' added to favorites for user')
-			
+			alert('Added to favorites!')
 		}
 		else{
-			console.log('Error while adding movie to favorites!')
+			console.log('Movie wasn`t added to favorites!')
+			const deleteResponse = axios.delete('https://localhost:44311/api/favoritemovies', {MovieId: movieId}, {withCredentials: true})
+			if (deleteResponse.status === 200){
+				console.log('Movie removed from favorites!')
+			}
 		}
 	}
 }
@@ -45,8 +41,18 @@ const Details = (props) => {
 		+ movieId
 		+ '/videos?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 	)
+
 	//check if movie in favourites
-	const btnCaption = ADD_TO_FAV
+	var favMoviesIds = []
+	axios.get('https://localhost:44311/api/favoritemovies', {withCredentials: true}).then(
+		(response) => Object.keys(response.data).forEach((property) => {
+			favMoviesIds.push(response.data[property].movieId)
+		})
+	)
+
+	const isFavorite = favMoviesIds.includes(movieId) ? true : false; 
+	var btnCaption = isFavorite ? 'Remove from favorites' : 'Add to favorites' //button caption
+
 	if (movieLoading || videoLoading) return 'Loading...'
 	if (getError || getError2) return 'Error...'
 
@@ -69,9 +75,7 @@ const Details = (props) => {
 					<div>Budget: {movieData.budget}$</div>
 					<div>Duration: {movieData.runtime}min.</div>
 					<div>Genres: {genres}</div>
-					<button onClick={(movieId) => {
-						addMovieToFavorite(movieId)
-					}}>{btnCaption}</button>
+					<button onClick={movieToFavorite.bind(this, movieId)}>{btnCaption}</button>
 				</div>
 
 			</div>
