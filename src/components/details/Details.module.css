@@ -1,0 +1,42 @@
+.detailsWrapper {
+	padding: 10px;
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	grid-auto-rows: auto;
+	background-color: dimgrey;
+	
+	color:beige;
+}
+
+.detailsImage {
+	background-color: rgb(58, 58, 58);
+}
+
+.detailsImage img {
+	border-radius: 20px;
+	width: 300px;
+}
+
+.content {
+	background-color: rgb(49, 49, 49);
+	padding-left: 10px;
+	color:beige;
+}
+
+.info {
+	background-color: rgb(51, 51, 51);
+	grid-column-start: 1;
+	grid-column-end: 3;
+	padding: 5px;
+	color:beige;
+}
+
+.video iframe {
+	width: 500px;
+	height: 300px;
+	background-color: bisque;
+}
+
+.cast {
+	background-color: rgb(73, 73, 73);
+}
