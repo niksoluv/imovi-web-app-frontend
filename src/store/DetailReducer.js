@@ -1,7 +1,7 @@
 const defaultState = {
 	movieDetail: {
-		movieReqData:{},
-		videoReqData:{}
+		movieReqData: {},
+		videoReqData: {}
 	}
 }
 

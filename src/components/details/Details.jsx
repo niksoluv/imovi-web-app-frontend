@@ -16,20 +16,17 @@ class Details extends Component {
 
 		const movieDetail = this.props.movieDetail.movieDetail.movieReqData
 		const videoDetail = this.props.movieDetail.movieDetail.videoReqData
-		//const { genres } = this.props.movieDetail
-		console.log(movieDetail)
-
 
 		if (!movieDetail.genres) {
 			return <div />
 		}
 		const releaseDate = movieDetail.release_date + ' ' + movieDetail.production_countries[0].iso_3166_1
 		const imageUrl = 'https://image.tmdb.org/t/p/w500' + movieDetail.poster_path
-		//debugger
-		const genres = movieDetail.genres.map(el => el.name).join(', ')
+
+		console.log(JSON.parse(movieDetail.genres))
+
+		const genres = JSON.parse(movieDetail.genres).map(el => el.name).join(', ')
 		const videoKey = videoDetail.results[0].key
-
-
 
 		return (
 			<div>

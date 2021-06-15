@@ -16,7 +16,7 @@ export const fetchMovieDetail = (movieId) => {
 			+ movieId
 			+ '?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 		const movieReq = await axios.get(url)
-
+		movieReq.data.genres = JSON.stringify(movieReq.data.genres)
 		url = 'https://api.themoviedb.org/3/movie/'
 			+ movieId
 			+ '/videos?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
