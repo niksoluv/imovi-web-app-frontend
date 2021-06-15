@@ -15,7 +15,7 @@ const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7
 const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
 const favouritesUrl = 'fav'
 
-class App extends React.Component{ 
+class App extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
