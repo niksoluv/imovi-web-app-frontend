@@ -7,7 +7,6 @@ import Details from './components/details/Details';
 import { Container } from 'react-bootstrap';
 import LogIn from './components/authentication/login/Login';
 import Register from './components/authentication/register/Register';
-import Users from './users'
 import React from 'react';
 
 

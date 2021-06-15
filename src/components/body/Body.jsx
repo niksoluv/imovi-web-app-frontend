@@ -4,11 +4,42 @@ import useAxios from 'axios-hooks';
 import { Component } from 'react';
 import { getPopular } from '../../redux/actions/moviesActions'
 import { connect } from 'react-redux';
+import { fetchMovies } from '../../storeAsyncActions/movies';
 import axios from 'axios';
+
+// class Body extends Component {
+// 	componentDidMount() {
+// 		this.props.getPopular(this.props.url)
+// 	}
+// 	render() {
+// 		const { movies } = this.props.movies
+// 		console.log(movies)
+
+// 		let movieArray = movies.map(el => {
+// 			const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']
+// 			return (
+// 				<MovieItem key={el['id']}
+// 					imageUrl={imageUrl}
+// 					id={el['id']}
+// 					originalTitle={el['original_title']} />
+// 			)
+// 		})
+// 		return (
+// 			<div className={styles.body}>
+// 				{movieArray}
+// 			</div>
+// 		)
+// 	}
+// }
+// const mapStateToProps = (state) => {
+// 	return { movies: state.moviesData }
+// }
+
+// export default connect(mapStateToProps, { getPopular })(Body)
 
 class Body extends Component {
 	componentDidMount() {
-		this.props.getPopular(this.props.url)
+		this.props.fetchMovies(this.props.url)
 	}
 	render() {
 		const { movies } = this.props.movies
@@ -26,12 +57,11 @@ class Body extends Component {
 		return (
 			<div className={styles.body}>
 				{movieArray}
-			</div>
-		)
+			</div>)
 	}
 }
 const mapStateToProps = (state) => {
-	return { movies: state.moviesData }
+	return { movies: state.movies }
 }
 
-export default connect(mapStateToProps, { getPopular })(Body)
+export default connect(mapStateToProps, { fetchMovies })(Body)
