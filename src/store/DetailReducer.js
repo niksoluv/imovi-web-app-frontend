@@ -2,7 +2,7 @@ const defaultState = {
 	movieDetail: {
 		movieReqData: {},
 		videoReqData: {},
-		btnCaption: ''
+		btnCaption: 'Add to favourites'
 	}
 }
 

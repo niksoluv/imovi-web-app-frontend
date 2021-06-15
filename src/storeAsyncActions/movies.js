@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { addMoviesAction } from '../store/moviesReducer'
-import { addMovieDetailAction, btnCaptionAction } from '../store/DetailReducer'
+import { addMovieDetailAction, btnCaptionAction } from '../store/detailReducer'
+import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 
 export const fetchMovies = (url) => {
@@ -53,13 +54,18 @@ export const fetchMovieDetail = (movieId) => {
 
 export const isMovieInFavourites = (movieId) => {
 	return async dispatch => {
-		const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
-
 		let btnCaption = 'Add to favourites'
-		const k = response.data.filter(el => el.movieId == movieId)
+		try {
+			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
+			const k = response.data.filter(el => el.movieId == movieId)
 
-		if (k.length > 0)
-			btnCaption = 'Remove from favourites'
+			if (k.length > 0)
+				btnCaption = 'Remove from favourites'
+		}
+		catch (e) {
+			console.log(e)
+			dispatch(btnCaptionAction(btnCaption))
+		}
 		dispatch(btnCaptionAction(btnCaption))
 	}
 }
@@ -67,17 +73,101 @@ export const isMovieInFavourites = (movieId) => {
 export const addMovieToFav = (movieId) => {
 	return async dispatch => {
 		const addResponse = await axios.post('https://localhost:44311/api/favoritemovies', { MovieId: movieId }, { withCredentials: true })
-		debugger
+
 		if (addResponse.data != 'exists') {
 			dispatch(btnCaptionAction('Remove from favourites'))
 		}
 		else {
-			debugger
 			console.log('Movie wasn`t added to favorites!')
 			const deleteResponse = await axios.delete('https://localhost:44311/api/favoritemovies/' + movieId, { withCredentials: true })
 			if (deleteResponse.status === 200) {
 				dispatch(btnCaptionAction('Add to favourites'))
 			}
+		}
+	}
+}
+
+export const login = (user) => {
+	return async dispatch => {
+		//usersAction.login(user)
+		let userData = {}
+		const response = await axios.get('https://localhost:44311/api/users/login', {
+			withCredentials: true,
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': 'Basic ' + btoa(user.email + ':' + user.password)
+			}
+		}
+		)
+		const data = response.data
+		if (response.status === 200) {
+			userData = {
+				id: data['id'],
+				name: data['name'],
+				email: data['email'],
+				password: data['password'],
+				registrationDate: data['registrationDate'],
+				birthDate: data['birthDate']
+			}
+			dispatch(loginAction(userData))
+		}
+		dispatch(loginAction(userData))
+	}
+}
+
+export const register = (userInfo) => {
+	return async dispatch => {
+		const data = {}
+		dispatch(registerAction(data))
+	}
+}
+
+export const getCurrentUserData = () => {
+	return async dispatch => {
+		let userData = {}
+		const response = await axios.get('https://localhost:44311/api/users/current', {
+			withCredentials: true,
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': 'Basic'
+			}
+		}
+		)
+		const data = response.data
+		if (response.status === 200) {
+			userData = {
+				id: data['id'],
+				name: data['name'],
+				email: data['email'],
+				password: data['password'],
+				registrationDate: data['registrationDate'],
+				birthDate: data['birthDate']
+			}
+			dispatch(loginAction(userData))
+		}
+
+		dispatch(loginAction(userData))
+	}
+}
+
+export const logout = () => {
+	return async dispatch => {
+		try {
+			let userData = {}
+			const response = await axios.get('https://localhost:44311/api/users/logout',
+				{
+					withCredentials: true,
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						'Authorization': 'Basic'
+					}
+				})
+			dispatch(logoutAction(userData))
+		} catch (e) {
+			console.log(e)
 		}
 	}
 }

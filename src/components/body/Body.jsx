@@ -43,7 +43,6 @@ class Body extends Component {
 	}
 	render() {
 		const { movies } = this.props.movies
-		console.log(movies)
 
 		let movieArray = movies.map(el => {
 			const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']

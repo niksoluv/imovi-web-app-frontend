@@ -8,14 +8,15 @@ import { Container } from 'react-bootstrap';
 import LogIn from './components/authentication/login/Login';
 import Register from './components/authentication/register/Register';
 import React from 'react';
+import Profile from './components/body/profile/Profile';
 
 
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
 const favouritesUrl = 'fav'
 
-class App extends React.Component{
-	constructor(props){
+class App extends React.Component {
+	constructor(props) {
 		super(props)
 		this.state = {
 			id: 0,
@@ -28,23 +29,25 @@ class App extends React.Component{
 		this.setCurrentUser = this.setCurrentUser.bind(this)
 	}
 
-	setCurrentUser(user){
+	setCurrentUser(user) {
 		this.setState(user)
 	}
 
-	render(){
+	render() {
 		return (
 			<BrowserRouter>
 				<div className='app-wrapper'>
 					<Header />
 					<Container>
 						<Route path='/movies' component={() => <Body url={popularUrl} />} />
-						<Route path='/favourites' component={() => <Body url={favouritesUrl} currentUser={this.state}/>} />
+						<Route path='/favourites' component={() => <Body url={favouritesUrl} currentUser={this.state} />} />
 						<Route path='/toprated' component={() => <Body url={topRatedUrl} />} />
 						<Route path='/details' component={(props) => {
-							return<Details id={props.location.state.movieId}/>}} />
-						<Route path='/login' component={() => <LogIn setCurrentUser={this.setCurrentUser}/>} />
-						<Route path='/register' component={() => <Register setCurrentUser={this.setCurrentUser}/>} />
+							return <Details id={props.location.state.movieId} />
+						}} />
+						<Route path='/login' component={() => <LogIn />} />
+						<Route path='/register' component={() => <Register />} />
+						<Route path='/profile' component={() => <Profile />} />
 					</Container>
 					<footer className='footer'>footer</footer>
 				</div>
