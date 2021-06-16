@@ -4,6 +4,7 @@ import CastContainer from './cast/CastContainer';
 import { connect } from 'react-redux';
 import { fetchMovieDetail } from '../../storeAsyncActions/movies';
 import Button from './button/Button';
+import CommentsContainer from './comments/CommentsContainer'
 
 class Details extends Component {
 
@@ -25,7 +26,7 @@ class Details extends Component {
 
 		const genres = JSON.parse(movieDetail.genres).map(el => el.name).join(', ')
 		const videoKey = videoDetail.results[0].key
-
+		
 		return (
 			<div>
 				<div className={styles.detailsWrapper}>
@@ -56,6 +57,9 @@ class Details extends Component {
 				</div>
 				<div className={styles.cast}>
 					<CastContainer id={this.props.id} />
+				</div>
+				<div>
+					<CommentsContainer id={this.props.id} />
 				</div>
 			</div>
 		)

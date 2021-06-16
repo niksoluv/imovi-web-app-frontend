@@ -7,7 +7,6 @@ const ADD_MOVIES = 'ADD_MOVIES'
 export const moviesReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case ADD_MOVIES:
-			debugger
 			return { ...state, movies: [...action.payload] }
 
 		default:

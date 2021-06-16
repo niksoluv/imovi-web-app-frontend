@@ -3,7 +3,8 @@ const defaultState = {
 		movieReqData: {},
 		videoReqData: {},
 		castData: [],
-		btnCaption: 'Add to favourites'
+		btnCaption: 'Add to favourites',
+		voteAverage: 0
 	}
 }
 
@@ -14,7 +15,6 @@ const ADD_CAST_DATA = 'ADD_CAST_DATA'
 export const movieDetailReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case ADD_MOVIE_DETAIL:
-			debugger
 			return { ...state, movieDetail: action.payload }
 		case SET_BTN_CAPTION:
 			return { ...state, btnCaption: action.payload }

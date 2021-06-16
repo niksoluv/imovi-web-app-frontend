@@ -56,7 +56,7 @@ class CastContainer extends Component {
 
 		return (
 			<div className={styles.scrollMenu}>
-				<ScrollMenu data={cast} />
+				<ScrollMenu alignCenter={false} data={cast} />
 			</div>
 		)
 	}

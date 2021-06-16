@@ -1,4 +1,3 @@
-import { Card } from "react-bootstrap"
 import styles from './CastItem.module.css'
 
 
@@ -7,7 +6,7 @@ const CastItem = (props) => {
 		<div className={styles.card}>
 			<img className="card-img-top" width='50px' src={props.imgSrc} alt={props.name} />
 			<div className="card-body"><p className="card-text"></p>
-				<a href="#" className="">{props.name}</a>
+				<a href="" className="">{props.name}</a>
 			</div>
 		</div>
 	)

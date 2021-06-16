@@ -74,7 +74,6 @@ class RegisterPage extends React.Component {
 		const user = this.state.user;
 		event.preventDefault();
 		if (this.validateForm(this.state.errors)) {
-			debugger
 			this.props.register(user)
 		}
 		else {
@@ -84,7 +83,6 @@ class RegisterPage extends React.Component {
 
 	render() {
 		const { submitted } = this.state;
-		debugger
 		if (this.props.userData.isAuthorised) {
 			return <Redirect to='/movies' />
 		}
