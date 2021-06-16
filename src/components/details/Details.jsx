@@ -7,6 +7,7 @@ import { makeUseAxios } from 'axios-hooks';
 import axios from 'axios';
 import { fetchMovieDetail } from '../../storeAsyncActions/movies';
 import Button from './button/Button';
+import CommentsBlock from './comments/CommentsBlock'
 
 // const useAxios = makeUseAxios({
 // 	axios: axios.create({ baseURL: '' })
@@ -151,6 +152,9 @@ class Details extends Component {
 				</div>
 				<div className={styles.cast}>
 					<CastContainer id={this.props.id} />
+				</div>
+				<div>
+					<CommentsBlock movieId={this.props.id}></CommentsBlock>
 				</div>
 			</div>
 		)

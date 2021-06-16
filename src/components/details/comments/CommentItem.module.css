@@ -1,0 +1,69 @@
+.content {
+	padding-left: 10px;
+	margin-top: 10px;
+	color:beige;
+    width: fit-content;
+}
+
+.commentRatingLabel {
+	color:beige;
+    width: fit-content;
+}
+
+.rating {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.media {
+    align-items: flex-start;
+    display: flex;
+    text-align: left;
+}
+
+.media_content {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: left;
+}
+
+.field {
+    margin-bottom: 0.75rem;
+    margin-top: 3rem;
+    padding-left: 5%
+}
+
+.textarea{
+    width: 95%;
+    border-radius: 8px;
+}
+
+.control {
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: left;
+}
+
+.btnSubmit {
+    display: block;
+    width: auto;
+    margin-top: 15px;
+    margin-left: 80%;
+    margin-right: 5%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: large;
+    border-radius: 8px;
+    -webkit-appearance: none;
+    outline: 0;
+    border: 0;
+    color: white;
+    background: #3eb144;
+    transition: 0.3s;
+}
