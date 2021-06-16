@@ -89,7 +89,6 @@ export const addMovieToFav = (movieId) => {
 
 export const login = (user) => {
 	return async dispatch => {
-		//usersAction.login(user)
 		let userData = {}
 		const response = await axios.get('https://localhost:44311/api/users/login', {
 			withCredentials: true,
@@ -116,10 +115,26 @@ export const login = (user) => {
 	}
 }
 
-export const register = (userInfo) => {
+export const register = (user) => {
 	return async dispatch => {
-		const data = {}
-		dispatch(registerAction(data))
+		let userData = {}
+		const response = await axios.post('https://localhost:44311/api/users/register', user, { withCredentials: true })
+		console.log(response)
+		const data = response.data
+
+		if (response.status === 400)
+			alert('Email or username is already used. Please, try another one.')
+		else if (response.status === 200) {
+			userData = {
+				id: data['id'],
+				name: data['name'],
+				email: data['email'],
+				password: data['password'],
+				registrationDate: data['registrationDate'],
+				birthDate: data['birthDate']
+			}
+			dispatch(registerAction(userData))
+		}
 	}
 }
 

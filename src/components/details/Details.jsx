@@ -1,10 +1,7 @@
 import styles from './Details.module.css'
 import { Component } from 'react';
 import CastContainer from './cast/CastContainer';
-import { getDetailData } from '../../redux/actions/DetailsAction'
 import { connect } from 'react-redux';
-import { makeUseAxios } from 'axios-hooks';
-import axios from 'axios';
 import { fetchMovieDetail } from '../../storeAsyncActions/movies';
 import Button from './button/Button';
 

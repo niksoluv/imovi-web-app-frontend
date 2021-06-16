@@ -49,7 +49,9 @@ class App extends React.Component {
 						<Route path='/register' component={() => <Register />} />
 						<Route path='/profile' component={() => <Profile />} />
 					</Container>
-					<footer className='footer'>footer</footer>
+					<footer className="footer">
+						Footer
+					</footer>
 				</div>
 			</BrowserRouter>
 		);

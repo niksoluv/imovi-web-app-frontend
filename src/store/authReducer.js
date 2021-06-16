@@ -12,8 +12,8 @@ export const authReducer = (state = defaultState, action) => {
 		case LOGIN:
 			return { ...state, userInfo: action.payload, isAuthorised: true }
 		case REGISTER:
-
-			return { ...state, userInfo: action.payload }
+			debugger
+			return { ...state, userInfo: action.payload, isAuthorised: true }
 		case LOGOUT:
 
 			return { ...state, userInfo: action.payload, isAuthorised: false }
