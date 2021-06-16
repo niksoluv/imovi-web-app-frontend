@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { addMoviesAction } from '../store/moviesReducer'
-import { addMovieDetailAction, btnCaptionAction } from '../store/detailReducer'
+import { addMovieDetailAction, btnCaptionAction, addCastDataAction } from '../store/detailReducer'
 import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 
@@ -57,7 +57,7 @@ export const isMovieInFavourites = (movieId) => {
 		let btnCaption = 'Add to favourites'
 		try {
 			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
-			const k = response.data.filter(el => el.movieId == movieId)
+			const k = response.data.filter(el => el.movieId === movieId)
 
 			if (k.length > 0)
 				btnCaption = 'Remove from favourites'
@@ -74,7 +74,7 @@ export const addMovieToFav = (movieId) => {
 	return async dispatch => {
 		const addResponse = await axios.post('https://localhost:44311/api/favoritemovies', { MovieId: movieId }, { withCredentials: true })
 
-		if (addResponse.data != 'exists') {
+		if (addResponse.data !== 'exists') {
 			dispatch(btnCaptionAction('Remove from favourites'))
 		}
 		else {
@@ -171,7 +171,7 @@ export const logout = () => {
 	return async dispatch => {
 		try {
 			let userData = {}
-			const response = await axios.get('https://localhost:44311/api/users/logout',
+			await axios.get('https://localhost:44311/api/users/logout',
 				{
 					withCredentials: true,
 					headers: {
@@ -184,5 +184,14 @@ export const logout = () => {
 		} catch (e) {
 			console.log(e)
 		}
+	}
+}
+
+export const getCast = (movieId) => {
+	return async dispatch => {
+		const res = await axios.get('https://api.themoviedb.org/3/movie/'
+			+ movieId
+			+ '/credits?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US')
+		dispatch(addCastDataAction(res.data.cast))
 	}
 }

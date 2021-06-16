@@ -15,7 +15,7 @@ class Header extends Component {
 					<NavLink className="navbar-brand" to={{
 						pathname: "/movies"
 					}}>
-						<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30" alt=""></img>
+						<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30"></img>
 					</NavLink>
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav">

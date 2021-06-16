@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { Component } from 'react'
 import { connect } from 'react-redux';
 import { addMovieToFav, isMovieInFavourites } from '../../../storeAsyncActions/movies';

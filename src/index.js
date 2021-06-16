@@ -7,7 +7,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import {store} from './store/index'
-import thunk from 'redux-thunk';
 
 ReactDOM.render(
 	<React.StrictMode>

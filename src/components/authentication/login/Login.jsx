@@ -95,7 +95,6 @@ class LoginPage extends React.Component {
 	}
 
 	render() {
-		const { username, email, password } = this.state.user;
 		const { submitted } = this.state;
 
 		if (this.props.userData.isAuthorised) {
