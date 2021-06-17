@@ -27,12 +27,20 @@
     flex-grow: 1;
     flex-shrink: 1;
     text-align: left;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    padding-left: 20px;
+    border-radius: 8px;
+    background-color: rgb(61, 61, 61);
+    border: 2px solid rgb(107, 107, 107);
 }
 
 .field {
     margin-bottom: 0.75rem;
     margin-top: 3rem;
-    padding-left: 5%
+    padding-left: 5%;
 }
 
 .textarea{

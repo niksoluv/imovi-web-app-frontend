@@ -2,93 +2,130 @@ import React from 'react';
 import styles from './CommentsContainer.module.css';
 import CommentItem from './commentItem/CommentItem';
 import ReactStars from 'react-rating-stars-component'
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { getComments, addComment, getCurrentUserData } from '../../../storeAsyncActions/movies'
 
 class CommentsBlock extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			commentsDataArray: [
-				{
-					author: 'Comment author 1',
-					text: 'Text of comment 1',
-					date: Date.now,
-					rating: 4
-				},
-				{
-					author: 'Comment author 2',
-					text: 'Another text of comment 2',
-					date: Date.now,
-					rating: 1
-				}
-			],
 			commentsItems: [],
-			comment: "",
-			rating: 3
+			comment: {
+				movieId: 0,
+				text: '',
+				rating: 5,
+			},
 		};
 
 		this.changeComment = this.changeComment.bind(this);
-		this.addComment = this.addComment.bind(this);
+		this.postComment = this.postComment.bind(this);
 	}
 
-	componentDidMount() {
-		let arr = this.state.commentsDataArray
-			.map(comment => {
-				return (
-					<CommentItem
-						author={comment['author']}
-						text={comment['text']}
-						date={comment['date']}
-						rating={comment['rating']} />
-				)
-			}
-			)
-		this.setState({ commentsItems: arr })
-		console.log('Comments: ' + this.state.commentsDataArray)
+	async componentDidMount() {
+		this.setState({comment: {...this.state.comment, movieId: this.props.id}})
+		this.props.getCurrentUserData()
+		await this.props.getComments(this.props.id)
+		this.setState({commentsItems: this.props.comments 
+			? 
+				this.props.comments
+				.map(comment => {
+					return (
+						<CommentItem
+							key={comment.id}
+							author={comment.name}
+							text={comment.text}
+							date={comment.date}
+							rating={comment.rating} />
+					)
+				})
+			:
+				[]})
+		console.log('Comments: ' + this.state.comments)
 	}
 
-	addComment(e) {
+	postComment(e) {
 		e.preventDefault()
 		let comment = this.state.comment;
 		if (comment === undefined || comment === "") return;
+		e.target.value = '';
+		this.props.addComment( comment )
+		this.setState({commentsItems: this.props.comments 
+			? 
+				this.props.comments
+				.map(comment => {
+					return (
+						<CommentItem
+							key={comment.id}
+							author={comment.name}
+							text={comment.text}
+							date={comment.date}
+							rating={comment.rating} />
+					)
+				})
+			:
+				[]})
 	}
 
 	changeComment(e) {
-		this.setState({ comment: e.target.value });
+		this.setState({
+			comment:{
+				...this.state.comment,
+				text: e.target.value
+			}
+		})
 	}
 
 	render() {
+		let addCommentBlock = this.props.userData.isAuthorised 
+			?
+				<div className={styles.control}>
+				<div className={styles.rating}>
+					<h5 className={styles.content}>Add your comment</h5>
+					<br />
+					<div className={styles.commentRatingLabel}>Movie rating
+						<ReactStars
+							count={10}
+							value={this.state.comment['rating']}
+							onChange={(newRating) => this.setState({
+								comment:{
+									...this.state.comment,
+									rating: newRating
+								}
+							})}
+							size={24}
+							activeColor="#ffd700"
+						/>
+					</div>
+				</div>
+				<textarea
+					className={styles.textarea}
+					placeholder="Add a comment..."
+					onChange={this.changeComment}
+				/>
+				<button className={styles.btnSubmit} onClick={this.postComment}>
+					Add comment
+				</button>
+			</div>
+		: 
+			<div className={styles.important}>	
+				<NavLink to='/login'>
+					<strong className={styles.underscored + ' ' + styles.important}>Login</strong>
+				</NavLink>
+				&nbsp;to add comments
+			</div>
+
+
 		return (
 			<div className={styles.media}>
 				<div className={styles.media_content}>
 					<h3 className={styles.content}>Comments</h3>
 					<div className={styles.field}>
-						<div className={styles.control}>
-
-							<div className={styles.rating}>
-								<h5 className={styles.content}>Add your comment</h5>
-								<br />
-								<div className={styles.commentRatingLabel}>Movie rating
-									<ReactStars
-										count={5}
-										value={this.state.rating}
-										onChange={(newRating) => this.setState({ rating: newRating })}
-										size={24}
-										activeColor="#ffd700"
-									/>
-								</div>
-							</div>
-							<textarea
-								className={styles.textarea}
-								placeholder="Add a comment..."
-								onChange={this.changeComment}
-							/>
-							<button className={styles.btnSubmit} onClick={this.addComment}>
-								Add comment
-							</button>
-						</div>
-
+						{addCommentBlock}
 						<div>
-							{this.state.commentsItems}
+							{
+								this.state.commentsItems
+							}
 						</div>
 					</div>
 				</div>
@@ -97,4 +134,11 @@ class CommentsBlock extends React.Component {
 	}
 }
 
-export default CommentsBlock;
+const mapStateToProps = (state) => {
+	return { 
+		comments: state.movieDetail.comments,
+		userData: state.userInfo
+	}
+}
+
+export default connect(mapStateToProps, { getComments, addComment, getCurrentUserData}) (CommentsBlock);

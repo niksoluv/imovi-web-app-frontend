@@ -1,6 +1,11 @@
 .body{
 	grid-area: c;
+	place-items: center;
+	justify-content: center;
 	background-color: rgb(43, 43, 43);
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border-radius: 8px;
 	display: flex;
 	flex-wrap: wrap;
 	width: fit-content;

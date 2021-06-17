@@ -5,7 +5,15 @@ import ReactStars from 'react-rating-stars-component';
 const CommentItem = (props) => {
 	const author = props.author
 	const text = props.text
-	const date = props.date
+	const date = new Date(props.date)
+	const dateFormatted = Intl.DateTimeFormat("en-GB", {
+		year: "numeric",
+		month: "long",
+		day: "2-digit",
+		hour12: false,
+		hour: "2-digit",
+		minute: "2-digit"
+	}).format(date)
 	const rating = props.rating
 
 	return (
@@ -17,9 +25,9 @@ const CommentItem = (props) => {
 						<br />
 						{text}
 					</p>
-					<small>{date}</small>
+					<small>{dateFormatted}</small>
 					<ReactStars
-						count={5}
+						count={10}
 						value={rating}
 						size={24}
 						activeColor="#ffd700"

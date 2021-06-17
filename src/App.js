@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+import styles from './App.css';
 import Header from './components/header/Header'
 import Body from './components/body/Body';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -18,29 +18,16 @@ const favouritesUrl = 'fav'
 class App extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			id: 0,
-			username: '',
-			email: '',
-			password: '',
-			registrationDate: '',
-			birthDate: ''
-		}
-		this.setCurrentUser = this.setCurrentUser.bind(this)
-	}
-
-	setCurrentUser(user) {
-		this.setState(user)
 	}
 
 	render() {
 		return (
 			<BrowserRouter>
-				<div className='app-wrapper'>
+				<div className={styles.app_wrapper}>
 					<Header />
-					<Container>
+					<Container className={styles.maincontainer}>
 						<Route path='/movies' component={() => <Body url={popularUrl} />} />
-						<Route path='/favourites' component={() => <Body url={favouritesUrl} currentUser={this.state} />} />
+						<Route path='/favourites' component={() => <Body url={favouritesUrl} />} />
 						<Route path='/toprated' component={() => <Body url={topRatedUrl} />} />
 						<Route path='/details' component={(props) => {
 							return <Details id={props.location.state.movieId} />
@@ -49,11 +36,15 @@ class App extends React.Component {
 						<Route path='/register' component={() => <Register />} />
 						<Route path='/profile' component={() => <Profile />} />
 					</Container>
-					<footer className="footer">
-						Footer
-					</footer>
 				</div>
+				<footer className={styles.footer}>
+					<h5><strong>Imovi</strong></h5>
+					<h7>Movie catalog web application based on React JS, Redux and .NET Web API</h7><br/>
+					<h7>Developed by students of group PZ-32</h7><br/>
+					<h6><strong>Vitaliy Hladkyi and Yaroslav Hura</strong></h6>
+				</footer>
 			</BrowserRouter>
+			
 		);
 	}
 }
