@@ -24,7 +24,11 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 
 			const res = await axios.all(reqArr)
 
-			const payload = res.map(el => el.data)
+			
+			const payload = {
+				movies: res.map(el => el.data),
+				hasMore: false
+			}
 			dispatch(addMoviesAction(payload))
 		}
 	}

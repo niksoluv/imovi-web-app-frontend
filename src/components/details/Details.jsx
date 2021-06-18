@@ -11,6 +11,7 @@ class Details extends Component {
 
 	componentDidMount() {
 		this.props.fetchMovieDetail(this.props.id)
+		window.scrollTo(0, 0)
 	}
 
 	render() {
