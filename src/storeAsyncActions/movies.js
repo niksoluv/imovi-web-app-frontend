@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { addMoviesAction } from '../store/moviesReducer'
-import { addMovieDetailAction, btnCaptionAction, addCastDataAction } from '../store/detailReducer'
+import { addMovieDetailAction, btnCaptionAction, addCastDataAction, getCommentsAction } from '../store/detailReducer'
 import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
 const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
@@ -226,5 +226,41 @@ export const getCast = (movieId) => {
 			+ movieId
 			+ '/credits?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US')
 		dispatch(addCastDataAction(res.data.cast))
+	}
+}
+
+export const getComments = (movieId) => {
+	return async dispatch => {
+		const usersRes = await axios.get('https://localhost:44311/api/users')
+		var users = []
+		var comments = []
+
+		Object.keys(usersRes.data).forEach((property) => {
+			users.push({
+				username: usersRes.data[property].name,
+				userId: usersRes.data[property].id
+			})
+		})
+
+		const commentsRes = await axios.get('https://localhost:44311/api/comments/' + movieId)
+	
+		Object.keys(commentsRes.data).forEach((property) => {
+			comments.push({
+				id: commentsRes.data[property].id,
+				movieId: commentsRes.data[property].movieId,
+				name: users.find(user => user.userId === commentsRes.data[property].userId).username,
+				text: commentsRes.data[property].text,
+				date: commentsRes.data[property].date,
+				rating: commentsRes.data[property].rating	
+			})
+		})
+
+		dispatch(getCommentsAction(comments))
+	}
+}
+
+export const addComment = (comment) => {
+	return async dispatch => {
+		await axios.post('https://localhost:44311/api/comments/add', {movieId: comment.movieId, text: comment.text, rating: comment.rating}, {withCredentials: true} )
 	}
 }

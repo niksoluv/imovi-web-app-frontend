@@ -16,6 +16,17 @@
     padding: 0px;
 }
 
+.underscored{
+    text-decoration: underline;
+}
+.important{
+    font-size: x-large;
+    padding-left: 10px;
+	margin-top: 10px;
+    margin-bottom: 25px;
+	color:beige;
+    width: fit-content;
+}
 .media {
     align-items: flex-start;
     display: flex;
@@ -40,6 +51,10 @@
 .textarea{
     width: 95%;
     border-radius: 8px;
+    min-height: 16vh;
+    height: 16vh;
+    max-height: 16vh;
+    resize: none;
 }
 
 .control {
@@ -60,7 +75,7 @@
     display: block;
     width: fit-content;
     margin-top: 15px;
-    margin-left: 5%;
+    margin-left: 75%;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;

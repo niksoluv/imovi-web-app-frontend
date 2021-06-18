@@ -3,6 +3,7 @@ import { Component } from 'react';
 import CastContainer from './cast/CastContainer';
 import { connect } from 'react-redux';
 import { fetchMovieDetail } from '../../storeAsyncActions/movies';
+import ReactStars from 'react-rating-stars-component'
 import Button from './button/Button';
 import CommentsContainer from './comments/CommentsContainer'
 
@@ -40,6 +41,21 @@ class Details extends Component {
 						<div>Budget: {movieDetail.budget}$</div>
 						<div>Duration: {movieDetail.runtime}min.</div>
 						<div>Genres: {genres}</div>
+						<div>Rating:  {movieDetail.vote_average}
+						<ReactStars
+							count={10}
+							value={movieDetail.vote_average}
+							onChange={(newRating) => this.setState({
+								comment:{
+									...this.state.comment,
+									rating: newRating
+								}
+							})}
+							edit={false}
+    						isHalf={true}
+							size={24}
+							activeColor="#ffd700"
+						/></div>
 						<Button movieId={this.props.id} />
 					</div>
 
