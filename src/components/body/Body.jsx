@@ -10,7 +10,7 @@ class Body extends Component {
 	componentDidMount() {
 		console.log("MOUNT")
 		this.props.removeMovies()
-		this.props.fetchMovies(this.props.url, this.props.keyword, this.props.movies.pageNumber)
+		this.props.fetchMovies(this.props.url, this.props.keyword, 1)
 	}
 
 	render() {
