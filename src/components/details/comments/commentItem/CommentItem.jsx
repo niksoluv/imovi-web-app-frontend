@@ -29,6 +29,7 @@ const CommentItem = (props) => {
 					<ReactStars
 						count={10}
 						value={rating}
+						edit={false}
 						size={24}
 						activeColor="#ffd700"
 					/>

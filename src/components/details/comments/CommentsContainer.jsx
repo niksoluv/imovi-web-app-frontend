@@ -29,6 +29,13 @@ class CommentsBlock extends React.Component {
 		this.setState({commentsItems: this.props.comments 
 			? 
 				this.props.comments
+				.sort(function(a, b) {
+					var dateA = new Date(a.date);
+					var dateB = new Date(b.date)
+					if (dateA > dateB) return -1;
+					if (dateA < dateB) return 1;
+					return 0;
+				})
 				.map(comment => {
 					return (
 						<CommentItem
@@ -44,15 +51,23 @@ class CommentsBlock extends React.Component {
 		console.log('Comments: ' + this.state.comments)
 	}
 
-	postComment(e) {
+	async postComment(e) {
 		e.preventDefault()
 		let comment = this.state.comment;
 		if (comment === undefined || comment === "") return;
-		e.target.value = '';
+		
 		this.props.addComment( comment )
+		await this.props.getComments( this.props.id )
 		this.setState({commentsItems: this.props.comments 
 			? 
 				this.props.comments
+				.sort(function(a, b) {
+					var dateA = new Date(a.date);
+					var dateB = new Date(b.date)
+					if (dateA > dateB) return -1;
+					if (dateA < dateB) return 1;
+					return 0;
+				})
 				.map(comment => {
 					return (
 						<CommentItem

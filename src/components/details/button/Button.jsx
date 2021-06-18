@@ -13,9 +13,10 @@ class Button extends Component {
 		const btnCaption = this.props.btnCaption
 		return (
 			<div>
-				<button onClick={() => {
+				<button className="btn btn-sm btn-light btn-outline-secondary" type="button" onClick={() => {
 					this.props.addMovieToFav(this.props.movieId)
-				}}>{btnCaption}</button>
+				}
+				}>{btnCaption}</button>
 			</div >
 		)
 	}

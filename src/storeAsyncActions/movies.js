@@ -109,8 +109,10 @@ export const login = (user) => {
 				registrationDate: data['registrationDate'],
 				birthDate: data['birthDate']
 			}
+			
 			dispatch(loginAction(userData))
 		}
+
 		dispatch(loginAction(userData))
 	}
 }
@@ -133,6 +135,7 @@ export const register = (user) => {
 				registrationDate: data['registrationDate'],
 				birthDate: data['birthDate']
 			}
+
 			dispatch(registerAction(userData))
 		}
 	}
@@ -221,13 +224,13 @@ export const getComments = (movieId) => {
 				rating: commentsRes.data[property].rating	
 			})
 		})
+
 		dispatch(getCommentsAction(comments))
 	}
 }
 
 export const addComment = (comment) => {
 	return async dispatch => {
-		const res = await axios.post('https://localhost:44311/api/comments/add', {movieId: comment.movieId, text: comment.text, rating: comment.rating}, {withCredentials: true} )
-		dispatch(getCommentsAction(comment.movieId))
+		await axios.post('https://localhost:44311/api/comments/add', {movieId: comment.movieId, text: comment.text, rating: comment.rating}, {withCredentials: true} )
 	}
 }

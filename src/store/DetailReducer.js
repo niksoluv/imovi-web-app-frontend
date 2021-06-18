@@ -13,7 +13,6 @@ const ADD_MOVIE_DETAIL = 'ADD_MOVIE_DETAIL'
 const SET_BTN_CAPTION = 'SET_BTN_CAPTION'
 const ADD_CAST_DATA = 'ADD_CAST_DATA'
 const GET_COMMENTS = 'GET_COMMENTS'
-const ADD_COMMENT = 'ADD_COMMENT'
 
 export const movieDetailReducer = (state = defaultState, action) => {
 	switch (action.type) {
@@ -25,8 +24,6 @@ export const movieDetailReducer = (state = defaultState, action) => {
 			return { ...state, castData: [...action.payload] }
 		case GET_COMMENTS:
 			return { ...state, comments: action.payload }
-		case ADD_COMMENT:
-			return { ...state, comments: action.payload }
 		default:
 			return state
 	}
@@ -36,4 +33,3 @@ export const addMovieDetailAction = (payload) => ({ type: ADD_MOVIE_DETAIL, payl
 export const btnCaptionAction = (payload) => ({ type: SET_BTN_CAPTION, payload })
 export const addCastDataAction = (payload) => ({ type: ADD_CAST_DATA, payload })
 export const getCommentsAction = (payload) => ({ type: GET_COMMENTS, payload })
-export const addCommentAction = (payload) => ({ type: ADD_COMMENT, payload })
