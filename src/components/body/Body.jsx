@@ -17,7 +17,8 @@ class Body extends Component {
 		const { movies } = this.props.movies
 
 		let movieArray = movies.map(el => {
-			const imageUrl = 'https://image.tmdb.org/t/p/w500/' + el['poster_path']
+			const imageUrl = el['poster_path'] ? 'https://image.tmdb.org/t/p/w500/' + el['poster_path'] :
+				'https://image.shutterstock.com/image-vector/design-404-error-vector-concept-600w-393533854.jpg'
 			return (
 				<MovieItem key={el['id']}
 					imageUrl={imageUrl}
@@ -25,7 +26,7 @@ class Body extends Component {
 					originalTitle={el['original_title']} />
 			)
 		})
-		
+
 		return (
 			<Container className='d-flex p-2' fluid={true} xl={10} lg={10} md={10} sm={10} xs={10}>
 

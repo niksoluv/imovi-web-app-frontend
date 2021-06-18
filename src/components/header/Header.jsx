@@ -60,7 +60,7 @@ class Header extends Component {
 							<li>
 								<NavLink className="btn btn-outline-success my-2 my-sm-0"
 									to={{
-										pathname: '/search',
+										pathname: '/search/' + this.state.value,
 										state: { data: this.state.value }
 									}}
 								>Search</NavLink>
