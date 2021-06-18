@@ -28,20 +28,20 @@ class Body extends Component {
 		})
 
 		return (
-			<Container className='d-flex p-2' fluid={true} xl={10} lg={10} md={10} sm={10} xs={10}>
-
+			<Container className='d-flex p-2' fluid={true} xl={10} lg={10} md={10} sm={10} xs={10} style={{ overflowY: 'hidden' }}>
 				<InfiniteScroll
+					style={{ overflow: 'hidden' }}
 					dataLength={movies.length} //This is important field to render the next data
 					next={() => this.props.fetchMovies(this.props.url, this.props.keyword, this.props.movies.pageNumber)}
 					hasMore={this.props.movies.hasMore}
 					loader={<h4>Loading...</h4>}
+					
 					endMessage={
-						<p style={{ textAlign: 'center' }}>
+						<p style={{ textAlign: 'center', color: 'beige'}}>
 							<b>Yay! You have seen it all</b>
 						</p>
 					}
 					scrollThreshold={0.9}
-					className
 				>
 					<Row>
 						{movieArray}
