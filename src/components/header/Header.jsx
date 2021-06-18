@@ -30,8 +30,8 @@ class Header extends Component {
 					}}>
 						<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30"></img>
 					</NavLink>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
+					<div className="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul className="navbar-nav mr-auto">
 							<li className="nav-item">
 								<NavLink className="nav-link" to={{
 									pathname: "/movies"
@@ -74,8 +74,8 @@ class Header extends Component {
 								}>Favourites</NavLink>
 							</li>
 						</ul>
-						<div class="form-inline bg-dark my-2 my-lg-0 ">
-							<ul class="navbar-nav mr-auto">
+						<div className="form-inline bg-dark my-2 my-lg-0 ">
+							<ul className="navbar-nav mr-auto">
 								{
 									this.props.userData.isAuthorised ?
 										<NavLink className="nav-link" to={{

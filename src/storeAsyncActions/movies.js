@@ -1,65 +1,108 @@
 import axios from 'axios'
-import { addMoviesAction } from '../store/moviesReducer'
+import { addMoviesAction, removeMoviesAction } from '../store/moviesReducer'
 import { addMovieDetailAction, btnCaptionAction, addCastDataAction, getCommentsAction } from '../store/detailReducer'
 import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
-const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
-const upcomingUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
-const nowPlayingUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+//const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+//const upcomingUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+//const nowPlayingUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
 
-export const fetchMovies = (url, keyword) => {
-	switch (url) {
-		case 'fav':
-			return async dispatch => {
-				const ids = []
-				const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
+export const fetchMovies = (url, keyword, pageNumber) => {
 
-				Object.keys(response.data).forEach((property) => {
-					ids.push(response.data[property].movieId)
-				})
+	if (url == 'fav') {
+		return async dispatch => {
+			const ids = []
+			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
 
-				const reqArr = ids.map(id => axios.get("https://api.themoviedb.org/3/movie/"
-					+ id
-					+ "?api_key=30c4ec1f7ead936d610a56b54bc4bbd4"))
+			Object.keys(response.data).forEach((property) => {
+				ids.push(response.data[property].movieId)
+			})
 
-				const res = await axios.all(reqArr)
+			const reqArr = ids.map(id => axios.get("https://api.themoviedb.org/3/movie/"
+				+ id
+				+ "?api_key=30c4ec1f7ead936d610a56b54bc4bbd4"))
 
-				const payload = res.map(el => el.data)
-				dispatch(addMoviesAction(payload))
+			const res = await axios.all(reqArr)
+
+			const payload = res.map(el => el.data)
+			dispatch(addMoviesAction(payload))
+		}
+	}
+	else if (url == 'popular') {
+		return async dispatch => {
+			const res = await axios.get(popularUrl)
+			const payload = {
+				movies: res.data.results,
+				hasMore: false
 			}
-		case 'top':
-			return async dispatch => {
-				const res = await axios.get(topRatedUrl)
-				dispatch(addMoviesAction(res.data.results))
-			}
-		case 'popular':
-			return async dispatch => {
-				const res = await axios.get(popularUrl)
-				dispatch(addMoviesAction(res.data.results))
-			}
-		case 'upcoming':
-			return async dispatch => {
-				const res = await axios.get(upcomingUrl)
-				dispatch(addMoviesAction(res.data.results))
-			}
-		case 'nowplaying':
-			return async dispatch => {
-				const res = await axios.get(nowPlayingUrl)
-				dispatch(addMoviesAction(res.data.results))
-			}
-		case 'search':
-			return async dispatch => {
-				const url =
-					'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
-					+ '&query=' + keyword + '&page=1/&include_adult=false'
-				const res = await axios.get(url)
-				dispatch(addMoviesAction(res.data.results))
-			}
-		default:
-			return async dispatch => {
-				const res = await axios.get(popularUrl)
-				dispatch(addMoviesAction(res.data.results))
-			}
+			dispatch(addMoviesAction(payload))
+		}
+	}
+	else {
+		switch (url) {
+			case 'top':
+				return async dispatch => {
+					const res = await axios.get(`https://api.themoviedb.org/3/movie
+					/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US
+					&page=${pageNumber}`)
+					const payload = {
+						movies: res.data.results,
+						hasMore: res.data.total_pages > pageNumber
+					}
+					dispatch(addMoviesAction(payload))
+				}
+			case 'upcoming':
+				return async dispatch => {
+					const res = await axios.get(`https://api.themoviedb.org/3/movie
+					/upcoming?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US
+					&page=${pageNumber}`)
+					const payload = {
+						movies: res.data.results,
+						hasMore: res.data.total_pages > pageNumber
+					}
+					dispatch(addMoviesAction(payload))
+				}
+			case 'nowplaying':
+				return async dispatch => {
+					const res = await axios.get(`https://api.themoviedb.org/3/movie
+					/now_playing?api_key=30c4ec1f7ead936d610a56b54bc4bbd4
+					&language=en-US&page=${pageNumber}`)
+					const payload = {
+						movies: res.data.results,
+						hasMore: res.data.total_pages > pageNumber
+					}
+					dispatch(addMoviesAction(payload))
+				}
+			case 'search':
+				return async dispatch => {
+					const url =
+						'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
+						+ '&query=' + keyword + `&page=${pageNumber}/&include_adult=false`
+					const res = await axios.get(url)
+					debugger
+					const payload = {
+						movies: res.data.results,
+						hasMore: res.data.total_pages > pageNumber
+					}
+					dispatch(addMoviesAction(payload))
+				}
+			default:
+				return async dispatch => {
+					const res = await axios.get(popularUrl)
+					const payload = {
+						movies: res.data.results,
+						hasMore: false
+					}
+					dispatch(addMoviesAction(payload))
+				}
+		}
+	}
+
+}
+
+export const removeMovies = () => {
+	return dispatch => {
+		dispatch(removeMoviesAction())
 	}
 }
 
@@ -243,7 +286,7 @@ export const getComments = (movieId) => {
 		})
 
 		const commentsRes = await axios.get('https://localhost:44311/api/comments/' + movieId)
-	
+
 		Object.keys(commentsRes.data).forEach((property) => {
 			comments.push({
 				id: commentsRes.data[property].id,
@@ -251,7 +294,7 @@ export const getComments = (movieId) => {
 				name: users.find(user => user.userId === commentsRes.data[property].userId).username,
 				text: commentsRes.data[property].text,
 				date: commentsRes.data[property].date,
-				rating: commentsRes.data[property].rating	
+				rating: commentsRes.data[property].rating
 			})
 		})
 
@@ -261,6 +304,6 @@ export const getComments = (movieId) => {
 
 export const addComment = (comment) => {
 	return async dispatch => {
-		await axios.post('https://localhost:44311/api/comments/add', {movieId: comment.movieId, text: comment.text, rating: comment.rating}, {withCredentials: true} )
+		await axios.post('https://localhost:44311/api/comments/add', { movieId: comment.movieId, text: comment.text, rating: comment.rating }, { withCredentials: true })
 	}
 }
