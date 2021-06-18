@@ -3,30 +3,63 @@ import { addMoviesAction } from '../store/moviesReducer'
 import { addMovieDetailAction, btnCaptionAction, addCastDataAction } from '../store/detailReducer'
 import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
+const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+const upcomingUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
+const nowPlayingUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
 
-export const fetchMovies = (url) => {
-	if (url === 'fav') {
-		return async dispatch => {
-			const ids = []
-			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
+export const fetchMovies = (url, keyword) => {
+	switch (url) {
+		case 'fav':
+			return async dispatch => {
+				const ids = []
+				const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
 
-			Object.keys(response.data).forEach((property) => {
-				ids.push(response.data[property].movieId)
-			})
+				Object.keys(response.data).forEach((property) => {
+					ids.push(response.data[property].movieId)
+				})
 
-			const reqArr = ids.map(id => axios.get("https://api.themoviedb.org/3/movie/"
-				+ id
-				+ "?api_key=30c4ec1f7ead936d610a56b54bc4bbd4"))
+				const reqArr = ids.map(id => axios.get("https://api.themoviedb.org/3/movie/"
+					+ id
+					+ "?api_key=30c4ec1f7ead936d610a56b54bc4bbd4"))
 
-			const res = await axios.all(reqArr)
+				const res = await axios.all(reqArr)
 
-			const payload = res.map(el => el.data)
-			dispatch(addMoviesAction(payload))
-		}
-	}
-	return async dispatch => {
-		const res = await axios.get(popularUrl)
-		dispatch(addMoviesAction(res.data.results))
+				const payload = res.map(el => el.data)
+				dispatch(addMoviesAction(payload))
+			}
+		case 'top':
+			return async dispatch => {
+				const res = await axios.get(topRatedUrl)
+				dispatch(addMoviesAction(res.data.results))
+			}
+		case 'popular':
+			return async dispatch => {
+				const res = await axios.get(popularUrl)
+				dispatch(addMoviesAction(res.data.results))
+			}
+		case 'upcoming':
+			return async dispatch => {
+				const res = await axios.get(upcomingUrl)
+				dispatch(addMoviesAction(res.data.results))
+			}
+		case 'nowplaying':
+			return async dispatch => {
+				const res = await axios.get(nowPlayingUrl)
+				dispatch(addMoviesAction(res.data.results))
+			}
+		case 'search':
+			return async dispatch => {
+				const url =
+					'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
+					+ '&query=' + keyword + '&page=1/&include_adult=false'
+				const res = await axios.get(url)
+				dispatch(addMoviesAction(res.data.results))
+			}
+		default:
+			return async dispatch => {
+				const res = await axios.get(popularUrl)
+				dispatch(addMoviesAction(res.data.results))
+			}
 	}
 }
 

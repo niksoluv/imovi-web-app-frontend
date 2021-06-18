@@ -3,6 +3,7 @@ import styles from './Register.module.css'
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { register } from '../../../storeAsyncActions/movies'
+import { NavLink } from 'react-router-dom'
 
 class RegisterPage extends React.Component {
 	constructor(props) {
@@ -109,6 +110,8 @@ class RegisterPage extends React.Component {
 				</div>
 
 				<button type="button" className={styles.btn} onClick={this.submitForm}>Register</button>
+				<NavLink className="nav-link"
+					to="/login">Already have an account?</NavLink>
 			</div>
 		)
 	}

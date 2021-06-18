@@ -1,13 +1,1 @@
-.body{
-	grid-area: c;
-	background-color: rgb(43, 43, 43);
-	display: flex;
-	flex-wrap: wrap;
-	width: fit-content;
-	block-size: fit-content;
-}
 
-.flexbox-container {
-	display: flex;
-	flex-direction: row;
-}

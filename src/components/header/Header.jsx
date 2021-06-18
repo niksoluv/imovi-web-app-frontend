@@ -1,13 +1,26 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { getCurrentUserData, logout } from '../../storeAsyncActions/movies'
 
 class Header extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { value: '' };
+
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(event) {
+		this.setState({ value: event.target.value });
+	}
+
 	componentDidMount() {
 		this.props.getCurrentUserData()
 	}
+
 	render() {
+
 		console.log(this.props)
 		return (
 			<div>
@@ -17,12 +30,40 @@ class Header extends Component {
 					}}>
 						<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30"></img>
 					</NavLink>
-					<div className="collapse navbar-collapse" id="navbarNav">
-						<ul className="navbar-nav">
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
 							<li className="nav-item">
 								<NavLink className="nav-link" to={{
 									pathname: "/movies"
 								}}>Popular</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to={{
+									pathname: "/toprated"
+								}}>Top Rated</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to={{
+									pathname: "/upcoming"
+								}}>Upcoming</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to={{
+									pathname: "/nowplaying"
+								}}>Now Playing</NavLink>
+							</li>
+							<li>
+								<input className="form-control mr-sm-2" type="search"
+									placeholder="Search" aria-label="Search"
+									value={this.state.value} onChange={this.handleChange} />
+							</li>
+							<li>
+								<NavLink className="btn btn-outline-success my-2 my-sm-0"
+									to={{
+										pathname: '/search',
+										state: { data: this.state.value }
+									}}
+								>Search</NavLink>
 							</li>
 							<li className="nav-item">
 								<NavLink className="nav-link" to={
@@ -32,37 +73,31 @@ class Header extends Component {
 										{ pathname: "/login" }
 								}>Favourites</NavLink>
 							</li>
-
-							{
-								this.props.userData.isAuthorised ?
-									<li className="nav-item">
+						</ul>
+						<div class="form-inline bg-dark my-2 my-lg-0 ">
+							<ul class="navbar-nav mr-auto">
+								{
+									this.props.userData.isAuthorised ?
 										<NavLink className="nav-link" to={{
 											pathname: "/profile"
 										}}>{this.props.userData.userInfo.name}</NavLink>
-									</li>
-									:
-									<li></li>
-							}
-							{
-								this.props.userData.isAuthorised ?
-									<li className="nav-item">
+										:
+										<div></div>
+								}
+								{
+									this.props.userData.isAuthorised ?
 										<NavLink className="nav-link" to={{
 											pathname: "/login"
 										}} onClick={() => {
 											this.props.logout()
 										}}>Logout</NavLink>
-									</li>
-									:
-									<li className="nav-item">
+										:
 										<NavLink className="nav-link" to={{
 											pathname: "/login"
 										}}>LogIn</NavLink>
-									</li>
-							}
-							<li className="nav-item">
-
-							</li>
-						</ul>
+								}
+							</ul>
+						</div>
 					</div>
 				</nav>
 			</div >
