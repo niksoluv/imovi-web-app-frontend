@@ -3,9 +3,6 @@ import { addMoviesAction, removeMoviesAction } from '../store/moviesReducer'
 import { addMovieDetailAction, btnCaptionAction, addCastDataAction, getCommentsAction } from '../store/detailReducer'
 import { loginAction, registerAction, logoutAction } from '../store/authReducer'
 const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US'
-//const topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
-//const upcomingUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
-//const nowPlayingUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US&page=1'
 
 export const fetchMovies = (url, keyword, pageNumber) => {
 
@@ -24,7 +21,7 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 
 			const res = await axios.all(reqArr)
 
-			
+
 			const payload = {
 				movies: res.map(el => el.data),
 				hasMore: false
@@ -83,7 +80,6 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 						'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
 						+ '&query=' + keyword + `&page=${pageNumber}/&include_adult=false`
 					const res = await axios.get(url)
-					debugger
 					const payload = {
 						movies: res.data.results,
 						hasMore: res.data.total_pages > pageNumber

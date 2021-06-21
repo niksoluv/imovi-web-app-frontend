@@ -1,0 +1,13 @@
+footer {
+	margin-top: 1rem;
+	padding: 1rem;
+	background-color: rgb(66, 66, 66);
+	color: beige;
+	position: relative;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	height: 18vh;
+	max-height: 18vh;
+	width: 100%;
+}

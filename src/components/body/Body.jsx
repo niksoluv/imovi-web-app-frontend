@@ -35,19 +35,17 @@ class Body extends Component {
 					next={() => this.props.fetchMovies(this.props.url, this.props.keyword, this.props.movies.pageNumber)}
 					hasMore={this.props.movies.hasMore}
 					loader={<h4>Loading...</h4>}
-					
+
 					endMessage={
-						<p style={{ textAlign: 'center', color: 'beige'}}>
+						<p style={{ textAlign: 'center', color: 'beige' }}>
 							<b>Yay! You have seen it all</b>
 						</p>
 					}
-					scrollThreshold={0.9}
-				>
+					scrollThreshold={0.9}>
 					<Row>
 						{movieArray}
 					</Row>
 				</InfiniteScroll>
-
 			</Container>)
 	}
 }

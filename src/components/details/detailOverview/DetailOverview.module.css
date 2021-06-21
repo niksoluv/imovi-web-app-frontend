@@ -1,0 +1,7 @@
+.info {
+	background-color: rgb(51, 51, 51);
+	grid-column-start: 1;
+	grid-column-end: 3;
+	padding: 5px;
+	color:beige;
+}

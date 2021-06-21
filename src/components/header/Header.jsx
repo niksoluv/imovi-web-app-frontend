@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom'
-import { getCurrentUserData, logout } from '../../storeAsyncActions/movies'
+import { getCurrentUserData, logout, fetchMovies, removeMovies } from '../../storeAsyncActions/movies'
 
 class Header extends Component {
 	constructor(props) {
@@ -63,6 +63,9 @@ class Header extends Component {
 										pathname: '/search/' + this.state.value,
 										state: { data: this.state.value }
 									}}
+									onClick={()=>{
+										this.props.removeMovies()
+										this.props.fetchMovies('search', this.state.value, 1)}}
 								>Search</NavLink>
 							</li>
 							<li className="nav-item">
@@ -109,4 +112,5 @@ const mapStateToProps = (state) => {
 	return { userData: state.userInfo }
 }
 
-export default connect(mapStateToProps, { getCurrentUserData, logout })(Header)
+export default connect(mapStateToProps, 
+	{ getCurrentUserData, logout, fetchMovies, removeMovies })(Header)
