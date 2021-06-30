@@ -68,7 +68,7 @@ class Header extends Component {
 										this.props.fetchMovies('search', this.state.value, 1)}}
 								>Search</NavLink>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item"> 
 								<NavLink className="nav-link" to={
 									this.props.userData.isAuthorised ?
 										{ pathname: "/favourites" }
