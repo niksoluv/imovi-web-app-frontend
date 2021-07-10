@@ -7,13 +7,11 @@ import { NavLink } from 'react-router-dom'
 class Button extends Component {
 
 	componentDidMount() {
-		debugger
 		this.props.isMovieInFavourites(this.props.movieId)
 	}
 
 	render() {
 		const btnCaption = this.props.btnCaption
-		debugger
 		return (
 			<div>
 				{this.props.userData.isAuthorised ?
@@ -24,16 +22,13 @@ class Button extends Component {
 					<NavLink to={{ pathname: "/login" }} className="btn btn-sm btn-light btn-outline-secondary" type="button" onClick={() => {
 						this.props.addMovieToFav(this.props.movieId)
 					}}>{btnCaption}</NavLink>
-					
 				}
-
 			</div >
 		)
 	}
 }
 
 const mapStateToProps = (state) => {
-	debugger
 	return { btnCaption: state.movieDetail.btnCaption, userData: state.userInfo }
 }
 

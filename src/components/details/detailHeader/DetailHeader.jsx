@@ -1,16 +1,18 @@
 import { Component } from "react"
-import ReactStars from "react-rating-stars-component"
+import ReactStars from "react-stars"
 import { connect } from "react-redux"
 import Button from "../button/Button"
 import styles from './DetailHeader.module.css'
 
 class DetailHeader extends Component {
 	render() {
-		const movieDetail = this.props.movieDetail
-		const releaseDate = movieDetail.release_date + ' ' + movieDetail.production_countries[0].iso_3166_1
+		debugger
+		const { movieDetail } = this.props
+		const releaseDate = movieDetail.release_date + ' ' + movieDetail?.production_countries[0]?.iso_3166_1
 		const imageUrl = 'https://image.tmdb.org/t/p/w500' + movieDetail.poster_path
 
 		const genres = JSON.parse(movieDetail.genres).map(el => el.name).join(', ')
+		debugger
 		return (
 			<div className={styles.detailsWrapper}>
 				<div className={styles.detailsImage}>
@@ -23,16 +25,13 @@ class DetailHeader extends Component {
 					<span>Budget: {movieDetail.budget}$</span>
 					<span>Duration: {movieDetail.runtime}min.</span>
 					<span>Genres: {genres}</span>
+					<span>Homepage:
+						<a target="_blank" href={movieDetail.homepage}>{movieDetail.original_title}</a>
+					</span>
 					<div>Rating:  {movieDetail.vote_average}
 						<ReactStars
 							count={10}
 							value={movieDetail.vote_average}
-							onChange={(newRating) => this.setState({
-								comment: {
-									...this.state.comment,
-									rating: newRating
-								}
-							})}
 							edit={false}
 							isHalf={true}
 							size={24}

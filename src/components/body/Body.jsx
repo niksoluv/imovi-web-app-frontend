@@ -1,6 +1,5 @@
-import styles from './Body.module.css'
 import MovieItem from './movieItem/MovieItem';
-import { Component, useState, useRef, useCallback } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies, removeMovies } from '../../storeAsyncActions/movies';
 import { Row, Container } from 'react-bootstrap';
