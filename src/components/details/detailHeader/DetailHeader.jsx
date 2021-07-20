@@ -6,13 +6,13 @@ import styles from './DetailHeader.module.css'
 
 class DetailHeader extends Component {
 	render() {
-		debugger
+		
 		const { movieDetail } = this.props
 		const releaseDate = movieDetail.release_date + ' ' + movieDetail?.production_countries[0]?.iso_3166_1
 		const imageUrl = 'https://image.tmdb.org/t/p/w500' + movieDetail.poster_path
 
 		const genres = JSON.parse(movieDetail.genres).map(el => el.name).join(', ')
-		debugger
+		
 		return (
 			<div className={styles.detailsWrapper}>
 				<div className={styles.detailsImage}>
@@ -25,8 +25,8 @@ class DetailHeader extends Component {
 					<span>Budget: {movieDetail.budget}$</span>
 					<span>Duration: {movieDetail.runtime}min.</span>
 					<span>Genres: {genres}</span>
-					<span>Homepage:
-						<a target="_blank" href={movieDetail.homepage}>{movieDetail.original_title}</a>
+					<span>Homepage: 
+						<a target="_blank" href={movieDetail.homepage}> {movieDetail.original_title}</a>
 					</span>
 					<div>Rating:  {movieDetail.vote_average}
 						<ReactStars
@@ -46,7 +46,6 @@ class DetailHeader extends Component {
 }
 
 const mapStateToProps = (state) => {
-
 	return { movieDetail: state.movieDetail.movieDetail.movieReqData }
 }
 

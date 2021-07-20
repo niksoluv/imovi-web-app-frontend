@@ -61,12 +61,13 @@ class Header extends Component {
 										pathname: '/search/' + this.state.value,
 										state: { data: this.state.value }
 									}}
-									onClick={()=>{
+									onClick={() => {
 										this.props.removeMovies()
-										this.props.fetchMovies('search', this.state.value, 1)}}
+										this.props.fetchMovies('search', this.state.value, 1)
+									}}
 								>Search</NavLink>
 							</li>
-							<li className="nav-item"> 
+							<li className="nav-item">
 								<NavLink className="nav-link" to={
 									this.props.userData.isAuthorised ?
 										{ pathname: "/favourites" }
@@ -110,5 +111,5 @@ const mapStateToProps = (state) => {
 	return { userData: state.userInfo }
 }
 
-export default connect(mapStateToProps, 
+export default connect(mapStateToProps,
 	{ getCurrentUserData, logout, fetchMovies, removeMovies })(Header)

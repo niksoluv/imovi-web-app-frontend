@@ -9,6 +9,7 @@ import Register from './components/authentication/register/Register';
 import React from 'react';
 import Profile from './components/body/profile/Profile';
 import Footer from './components/footer/Footer';
+import { connect } from 'react-redux';
 
 const POPULAR = 'popular'
 const TOP_RATED = 'top'
@@ -19,8 +20,10 @@ const SEARCH = 'search'
 
 class App extends React.Component {
 
-
 	render() {
+		console.log(this.props.data)
+				
+
 		return (
 			<BrowserRouter>
 				<div className='app-wrapper'>
@@ -48,4 +51,5 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+export default App
+

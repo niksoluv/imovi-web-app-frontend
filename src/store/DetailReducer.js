@@ -15,6 +15,7 @@ const ADD_CAST_DATA = 'ADD_CAST_DATA'
 const GET_COMMENTS = 'GET_COMMENTS'
 
 export const movieDetailReducer = (state = defaultState, action) => {
+	
 	switch (action.type) {
 		case ADD_MOVIE_DETAIL:
 			return { ...state, movieDetail: action.payload }

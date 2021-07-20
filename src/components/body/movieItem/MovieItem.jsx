@@ -9,7 +9,14 @@ const MovieItem = (props) => {
 		<Col xs={2.5}>
 			<div className={styles.movieElement}>
 				<div className={styles.imageElement}>
-					<img src={props.imageUrl} alt={props.originalTitle} title={props.originalTitle} />
+					<NavLink to={{
+						pathname: "/details",
+						state: { movieId: props.id }
+					}}>
+						<img src={props.imageUrl} alt={props.originalTitle}
+							title={props.originalTitle} />
+					</NavLink>
+
 				</div>
 				<div className={styles.contentElement}>
 					<div>

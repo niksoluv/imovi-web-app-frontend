@@ -6,7 +6,7 @@ const CastItem = (props) => {
 		<div className={styles.card}>
 			<img className="card-img-top" width='50px' src={props.imgSrc} alt={props.name} />
 			<div className="card-body"><p className="card-text"></p>
-				<a href="" className="">{props.name}</a>
+				<span href="" className="text-light">{props.name}</span>
 			</div>
 		</div>
 	)

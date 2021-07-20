@@ -7,7 +7,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 class Body extends Component {
 	componentDidMount() {
-		console.log("MOUNT")
 		this.props.removeMovies()
 		this.props.fetchMovies(this.props.url, this.props.keyword, 1)
 	}

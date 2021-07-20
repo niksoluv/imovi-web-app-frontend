@@ -80,9 +80,11 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 						'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
 						+ '&query=' + keyword + `&page=${pageNumber}/&include_adult=false`
 					const res = await axios.get(url)
+					debugger
 					const payload = {
 						movies: res.data.results,
-						hasMore: res.data.total_pages > pageNumber
+						hasMore: res.data.total_pages > pageNumber,
+						keyword: keyword
 					}
 					dispatch(addMoviesAction(payload))
 				}
@@ -131,17 +133,22 @@ export const fetchMovieDetail = (movieId) => {
 export const isMovieInFavourites = (movieId) => {
 	return async dispatch => {
 		let btnCaption = 'Add to favourites'
+		let k = []
+
 		try {
 			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
-			const k = response.data.filter(el => el.movieId === movieId)
+			k = response.data.filter(el => el.movieId === movieId)
+
 
 			if (k.length > 0)
 				btnCaption = 'Remove from favourites'
 		}
 		catch (e) {
 			console.log(e)
-			dispatch(btnCaptionAction(btnCaption))
+			//dispatch(btnCaptionAction(btnCaption))
 		}
+
+
 		dispatch(btnCaptionAction(btnCaption))
 	}
 }
@@ -265,6 +272,7 @@ export const logout = () => {
 
 export const getCast = (movieId) => {
 	return async dispatch => {
+
 		const res = await axios.get('https://api.themoviedb.org/3/movie/'
 			+ movieId
 			+ '/credits?api_key=30c4ec1f7ead936d610a56b54bc4bbd4&language=en-US')
@@ -274,6 +282,7 @@ export const getCast = (movieId) => {
 
 export const getComments = (movieId) => {
 	return async dispatch => {
+
 		const usersRes = await axios.get('https://localhost:44311/api/users')
 		var users = []
 		var comments = []
@@ -303,6 +312,7 @@ export const getComments = (movieId) => {
 }
 
 export const addComment = (comment) => {
+
 	return async dispatch => {
 		await axios.post('https://localhost:44311/api/comments/add', { movieId: comment.movieId, text: comment.text, rating: comment.rating }, { withCredentials: true })
 	}

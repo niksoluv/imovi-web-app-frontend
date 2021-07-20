@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import CastContainer from './cast/CastContainer';
 import { connect } from 'react-redux';
-import { fetchMovieDetail } from '../../storeAsyncActions/movies';
+import { fetchMovieDetail, isMovieInFavourites } from '../../storeAsyncActions/movies';
 import CommentsContainer from './comments/CommentsContainer'
 import DetailHeader from './detailHeader/DetailHeader';
 import DetailOverview from './detailOverview/DetailOverview';
@@ -11,6 +11,7 @@ class Details extends Component {
 
 	componentDidMount() {
 		this.props.fetchMovieDetail(this.props.id)
+		this.props.isMovieInFavourites(this.props.id)
 		window.scrollTo(0, 0)
 	}
 
@@ -34,7 +35,8 @@ class Details extends Component {
 }
 
 const mapStateToProps = (state) => {
+	
 	return { movieDetail: state.movieDetail }
 }
 
-export default connect(mapStateToProps, { fetchMovieDetail })(Details)
+export default connect(mapStateToProps, { fetchMovieDetail, isMovieInFavourites })(Details)
