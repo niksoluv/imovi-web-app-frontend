@@ -236,13 +236,15 @@ export const getCurrentUserData = () => {
 		const data = response.data
 		if (response.status === 200) {
 			userData = {
-				id: data['id'],
-				name: data['name'],
-				email: data['email'],
-				password: data['password'],
-				registrationDate: data['registrationDate'],
-				birthDate: data['birthDate']
+				id: data.id,
+				name: data.name,
+				email: data.email,
+				password: data.password,
+				registrationDate: data.registrationDate,
+				birthDate: data.birthDate,
+				profileColors: data.profileColors.map(color=>color.color)
 			}
+		
 			dispatch(loginAction(userData))
 		}
 
