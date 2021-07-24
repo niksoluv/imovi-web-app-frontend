@@ -11,8 +11,12 @@ const MovieItem = (props) => {
 				<div className={styles.imageElement}>
 					<NavLink to={{
 						pathname: "/details",
-						state: { movieId: props.id }
-					}}>
+						state: { movieId: props.id },
+						query: { movieId: props.id }
+					}}
+						onClick={() => {
+							localStorage.setItem('movieId', props.id)
+						}}>
 						<img src={props.imageUrl} alt={props.originalTitle}
 							title={props.originalTitle} />
 					</NavLink>
@@ -22,9 +26,13 @@ const MovieItem = (props) => {
 					<div>
 						<NavLink to={{
 							pathname: "/details",
-							state: { movieId: props.id }
+							state: { movieId: props.id },
+							query: { movieId: props.id }
 						}}
-						> {props.originalTitle}</NavLink>
+							onClick={() => {
+								localStorage.setItem('movieId', props.id)
+							}}>
+							{props.originalTitle}</NavLink>
 					</div>
 				</div>
 			</div>

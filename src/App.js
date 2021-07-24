@@ -38,7 +38,7 @@ class App extends React.Component {
 						}} />
 						<Route path='/favourites' component={() => <Body url={FAVOURITES} />} />
 						<Route path='/details' component={(props) => {
-							return <Details id={props.location.state.movieId} />
+							return <Details id={localStorage.getItem('movieId')} />
 						}} />
 						<Route path='/login' component={() => <LogIn />} />
 						<Route path='/register' component={() => <Register />} />
