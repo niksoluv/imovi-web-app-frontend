@@ -29,7 +29,7 @@ class CommentsContainer extends Component {
 				return 0;
 			})
 			.map(comment => {
-				debugger
+				
 				return (
 					<CommentItem
 						key={comment.id}

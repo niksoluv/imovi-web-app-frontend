@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { getCurrentUserData, logout, fetchMovies, removeMovies } from '../../storeAsyncActions/movies'
 
 class Header extends Component {
@@ -51,9 +51,12 @@ class Header extends Component {
 								}}>Now Playing</NavLink>
 							</li>
 							<li>
-								<input className="form-control mr-sm-2" type="search"
-									placeholder="Search" aria-label="Search"
-									value={this.state.value} onChange={this.handleChange} />
+								<form>
+									<input className="form-control mr-sm-2" type="search"
+										placeholder="Search" aria-label="Search"
+										value={this.state.value} onChange={this.handleChange} />
+								</form>
+
 							</li>
 							<li>
 								<NavLink className="btn btn-outline-success my-2 my-sm-0"
@@ -63,7 +66,7 @@ class Header extends Component {
 									}}
 									onClick={() => {
 										this.props.removeMovies()
-										this.props.fetchMovies('search', this.state.value, 1)
+										this.props.fetchMovies('search', this.state.value, this.props.pageNumber)
 									}}
 								>Search</NavLink>
 							</li>
@@ -108,7 +111,10 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { userData: state.userInfo }
+	return {
+		userData: state.userInfo,
+		pageNumber: state.movies.pageNumber
+	}
 }
 
 export default connect(mapStateToProps,

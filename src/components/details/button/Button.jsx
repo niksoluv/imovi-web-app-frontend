@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux';
-import { addMovieToFav, isMovieInFavourites } from '../../../storeAsyncActions/movies'
+import { addMovieToFav } from '../../../storeAsyncActions/movies'
 import { NavLink } from 'react-router-dom'
 
 

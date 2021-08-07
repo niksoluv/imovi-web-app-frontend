@@ -6,7 +6,7 @@ const popularUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=30c4ec1f7
 
 export const fetchMovies = (url, keyword, pageNumber) => {
 
-	if (url == 'fav') {
+	if (url === 'fav') {
 		return async dispatch => {
 			const ids = []
 			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
@@ -29,7 +29,7 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 			dispatch(addMoviesAction(payload))
 		}
 	}
-	else if (url == 'popular') {
+	else if (url === 'popular') {
 		return async dispatch => {
 			const res = await axios.get(popularUrl)
 			const payload = {
@@ -79,8 +79,8 @@ export const fetchMovies = (url, keyword, pageNumber) => {
 					const url =
 						'https://api.themoviedb.org/3/search/movie?api_key=30c4ec1f7ead936d610a56b54bc4bbd4'
 						+ '&query=' + keyword + `&page=${pageNumber}/&include_adult=false`
+						
 					const res = await axios.get(url)
-					debugger
 					const payload = {
 						movies: res.data.results,
 						hasMore: res.data.total_pages > pageNumber,
@@ -132,13 +132,14 @@ export const fetchMovieDetail = (movieId) => {
 
 export const isMovieInFavourites = (movieId) => {
 	return async dispatch => {
+		debugger
 		let btnCaption = 'Add to favourites'
 		let k = []
 
 		try {
 			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
-			k = response.data.filter(el => el.movieId === movieId)
-
+			k = response.data.filter(el => el.movieId == movieId)
+			debugger
 
 			if (k.length > 0)
 				btnCaption = 'Remove from favourites'
@@ -148,7 +149,7 @@ export const isMovieInFavourites = (movieId) => {
 			//dispatch(btnCaptionAction(btnCaption))
 		}
 
-
+		debugger
 		dispatch(btnCaptionAction(btnCaption))
 	}
 }

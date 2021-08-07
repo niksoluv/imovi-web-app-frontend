@@ -3,7 +3,6 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import styles from '../../details/detailHeader/DetailHeader.module.css'
 import {getCurrentUserData}from '../../../storeAsyncActions/movies'
-import Button from "../../details/button/Button";
 
 class Profile extends Component {
 	componentDidMount() {
@@ -16,7 +15,6 @@ class Profile extends Component {
 
 	render() {
 		const { userData } = this.props
-		let num = this.getRandomInt(5)
 		const registrationDate =
 			new Date(Date.parse(userData.userInfo.registrationDate))
 
