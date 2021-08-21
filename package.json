@@ -1,6 +1,9 @@
 {
   "name": "imovi-web-app-frontend",
   "version": "0.1.0",
+	"engines": {
+    "node": "16.2.0"
+  },
   "private": true,
   "homepage": "/movies",
   "dependencies": {
