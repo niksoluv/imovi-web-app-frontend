@@ -4,6 +4,7 @@ import styles from './CastContainer.module.css'
 import { Component } from "react";
 import { connect } from "react-redux";
 import { getCast } from '../../../storeAsyncActions/movies'
+import { Container } from "react-bootstrap";
 
 class CastContainer extends Component {
 
@@ -24,6 +25,9 @@ class CastContainer extends Component {
 		})
 
 		return (
+			// <Container>
+			// 	<ScrollMenu alignCenter={false} data={cast} />
+			// </Container>
 			<div className={styles.cast}>
 				<div className={styles.scrollMenu}>
 					<ScrollMenu alignCenter={false} data={cast} />

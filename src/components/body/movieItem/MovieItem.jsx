@@ -37,7 +37,7 @@ const MovieItem = (props) => {
 		// 		</div>
 		// 	</div>
 		// </Col>
-		<Card className="bg-dark card border-secondary mb-1 text-white" style={{ width: '9rem' }}>
+		<Card className="bg-dark card border-secondary mb-1 text-white" style={{ width: '12rem' }}>
 			<NavLink to={{
 				pathname: "/details",
 				state: { movieId: props.id },
