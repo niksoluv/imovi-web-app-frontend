@@ -40,7 +40,7 @@ class Body extends Component {
 						</p>
 					}
 					scrollThreshold={0.9}>
-					<Row>
+					<Row className='d-flex justify-content-center'>
 						{movieArray}
 					</Row>
 				</InfiniteScroll>

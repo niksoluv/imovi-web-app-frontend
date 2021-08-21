@@ -132,14 +132,14 @@ export const fetchMovieDetail = (movieId) => {
 
 export const isMovieInFavourites = (movieId) => {
 	return async dispatch => {
-		debugger
+		
 		let btnCaption = 'Add to favourites'
 		let k = []
 
 		try {
 			const response = await axios.get('https://localhost:44311/api/favoritemovies', { withCredentials: true })
 			k = response.data.filter(el => el.movieId == movieId)
-			debugger
+			
 
 			if (k.length > 0)
 				btnCaption = 'Remove from favourites'
@@ -149,7 +149,7 @@ export const isMovieInFavourites = (movieId) => {
 			//dispatch(btnCaptionAction(btnCaption))
 		}
 
-		debugger
+		
 		dispatch(btnCaptionAction(btnCaption))
 	}
 }

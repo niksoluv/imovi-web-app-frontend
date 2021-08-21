@@ -33,9 +33,9 @@
 	width: 200px;
 }
 
-.contentElement a{
+.a{
 	text-decoration: none;
-	color: aqua;
+	color: rgb(6, 8, 8);
 }
 
 .imageElement img{
