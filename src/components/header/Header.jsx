@@ -22,12 +22,17 @@ class Header extends Component {
 	render() {
 		return (
 			<div>
-				<nav className="navbar navbar-expand navbar-dark bg-dark" height='45px'>
+				<nav className="navbar navbar-expand-lg navbar-dark bg-dark"
+					id="navbarSupportedContent"
+					height='45px'>
 					<NavLink className="navbar-brand" to={{
 						pathname: "/movies"
 					}}>
 						<img src={process.env.PUBLIC_URL + '/ic_small.png'} alt='/ic_small.png' width="30" height="30"></img>
 					</NavLink>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul className="navbar-nav mr-auto">
 							<li className="nav-item">
